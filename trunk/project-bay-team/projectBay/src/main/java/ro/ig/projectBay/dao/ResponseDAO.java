@@ -1,5 +1,7 @@
 package ro.ig.projectBay.dao;
 
-public interface ResponseDAO extends AbstractDAO {
+import ro.ig.projectBay.model.Response;
+
+public interface ResponseDAO extends AbstractDAO<Response> {
 
 }
