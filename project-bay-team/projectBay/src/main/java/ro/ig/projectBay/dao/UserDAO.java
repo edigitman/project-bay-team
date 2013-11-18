@@ -1,5 +1,7 @@
 package ro.ig.projectBay.dao;
 
-public interface UserDAO extends AbstractDAO {
+import ro.ig.projectBay.model.User;
+
+public interface UserDAO extends AbstractDAO<User> {
 
 }

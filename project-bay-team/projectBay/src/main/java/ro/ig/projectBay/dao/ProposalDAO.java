@@ -1,5 +1,7 @@
 package ro.ig.projectBay.dao;
 
-public interface ProposalDAO  extends AbstractDAO {
+import ro.ig.projectBay.model.Proposal;
+
+public interface ProposalDAO  extends AbstractDAO<Proposal> {
 
 }
