@@ -18,10 +18,10 @@ import javax.persistence.OneToMany;
 @SuppressWarnings("serial")
 @Entity(name = "user")
 @NamedQueries({
-		@NamedQuery(name = "findUserById", query = "select u from user u where u.idUser= :id"),
-		@NamedQuery(name = "findAllUsers", query = "select u from user u"),
-		@NamedQuery(name = "findUserByEmail", query = "select u from user u where u.email = :email"),
-		@NamedQuery(name = "findUserByEmailAndPassword", query = "select u from user u where u.email = :email and u.password = :password") })
+		@NamedQuery(name = "User.findUserById", query = "select u from user u where u.idUser= :id"),
+		@NamedQuery(name = "User.findAllUsers", query = "select u from user u"),
+		@NamedQuery(name = "User.findUserByEmail", query = "select u from user u where u.email = :email"),
+		@NamedQuery(name = "User.findUserByEmailAndPassword", query = "select u from user u where u.email = :email and u.password = :password") })
 public class User implements Serializable {
 
 	/**
@@ -31,8 +31,8 @@ public class User implements Serializable {
 	@GeneratedValue
 	private long idUser;
 
-	/** 
-	 * The business id. 
+	/**
+	 * The business id.
 	 */
 	@Column(length = 10, unique = true)
 	private String businessId;
@@ -80,7 +80,7 @@ public class User implements Serializable {
 
 	@OneToMany(mappedBy = "userObject")
 	private List<Proposal> proposalList;
-	
+
 	/**
 	 * The user's cv.
 	 */
@@ -285,5 +285,4 @@ public class User implements Serializable {
 		this.cv = cv;
 	}
 
-	
 }
