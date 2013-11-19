@@ -1,9 +1,6 @@
 package ro.ig.projectBay.enitityTesting;
 
 import junit.framework.TestCase;
-
-import org.junit.Test;
-
 import ro.ig.projectBay.model.User;
 
 public class UserTest extends TestCase {
@@ -15,7 +12,6 @@ public class UserTest extends TestCase {
 		super(testName);
 	}
 
-	@Test
 	public void crudTest() {
 		// create
 		User user = createUser1();
