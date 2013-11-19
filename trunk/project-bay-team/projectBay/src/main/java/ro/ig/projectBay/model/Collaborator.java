@@ -17,7 +17,7 @@ import javax.persistence.NamedQuery;
 @Entity(name = "collaborator")
 @NamedQueries({
 		@NamedQuery(name = "findAllCollaborators", query = "SELECT c FROM collaborator c"),
-		@NamedQuery(name = "findAllCollaboratorsById", query = "SELECT c FROM collaborator c WHERE c.collaboratorId = :idCollaborator"),
+		@NamedQuery(name = "findAllCollaboratorsById", query = "SELECT c FROM collaborator c WHERE c.idCollaborator = :idCollaborator"),
 		@NamedQuery(name = "findCollaboratorsByAgency", query = "SELECT c FROM collaborator c WHERE c.agency = :agency"), })
 public class Collaborator {
 
@@ -33,7 +33,7 @@ public class Collaborator {
 	 */
 	@Id
 	@GeneratedValue
-	private int collaboratorId;
+	private int idCollaborator;
 	
 	
 	/**
@@ -113,7 +113,7 @@ public class Collaborator {
 	 * @return the collaborator id
 	 */
 	public int getCollaboratorId() {
-		return collaboratorId;
+		return idCollaborator;
 	}
 
 	/**
@@ -121,8 +121,8 @@ public class Collaborator {
 	 *
 	 * @param collaboratorId the new collaborator id
 	 */
-	public void setCollaboratorId(int collaboratorId) {
-		this.collaboratorId = collaboratorId;
+	public void setCollaboratorId(int idCollaborator) {
+		this.idCollaborator = idCollaborator;
 	}
 
 	/**

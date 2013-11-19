@@ -73,7 +73,7 @@ public class Response implements Serializable {
 	 */
 	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
-	@JoinTable(name = "belong", joinColumns = @JoinColumn(name = "idResponse"), inverseJoinColumns = @JoinColumn(name = "collaboratorId"))
+	@JoinTable(name = "belong", joinColumns = @JoinColumn(name = "idResponse"), inverseJoinColumns = @JoinColumn(name = "idCollaborator"))
 	private List<Collaborator> collaboratorList;
 
 	/**

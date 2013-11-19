@@ -1,6 +1,9 @@
 package ro.ig.projectBay.enitityTesting;
 
 import junit.framework.TestCase;
+
+import org.junit.Test;
+
 import ro.ig.projectBay.model.User;
 
 public class UserTest extends TestCase {
@@ -12,7 +15,7 @@ public class UserTest extends TestCase {
 		super(testName);
 	}
 
-	//@Test
+	@Test
 	public void testCrud() {
 		// create
 		User user = createUser1();
@@ -33,7 +36,7 @@ public class UserTest extends TestCase {
 		assertNotNull(user);
 		assertEquals("ioana.ioana@ioana.com", user.getEmail());
 		// delete
-		deleteUser(user);
+		//deleteUser(user);
 		
 		em.close();
 	}
