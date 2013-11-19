@@ -1,11 +1,39 @@
 package ro.ig.projectBay.dao;
 
-import java.util.Collection;
 
-public interface AbstractDAO <T>{
+/**
+ * The Interface AbstractDAO.
+ *
+ * @param <T> the generic type
+ */
+public interface AbstractDAO<T> {
 
-	public void add(T object);
-	public Collection<T> getAll();
-	public void edit(T initialObject, T newObject);
-	public void delete(T object);
+	/**
+	 * Adds an object.
+	 *
+	 * @param object the object
+	 */
+	T add(T object);
+
+	/**
+	 * Gets the all.
+	 *
+	 * @return the all
+	 */
+	T find(long id);
+
+	/**
+	 * Update.
+	 *
+	 * @param t the t
+	 * @return the t
+	 */
+	T edit(final T t);
+	
+	/**
+	 * Delete the object.
+	 *
+	 * @param object the object
+	 */
+	void delete(long id);
 }
