@@ -45,7 +45,7 @@
 
 					<h:form>
 						<!-- Brand -->
-						<h:link class="brand" outcome="default">Project Bay
+						<h:link class="brand" outcome="/default">Project Bay
                             <f:param name="cid"
 								value="#{javax.enterprise.context.conversation.id}" />
 						</h:link>
@@ -97,18 +97,17 @@
                                 </li>
                                 -->
 								<li>
-									<!--<i class="icon-off icon-white"></i>--> <h:commandLink
-										action="#{accountController.doLogout}"
-										rendered="#{userMB.userLoggedIn}">
-										<h:outputText value="${i18n.logOut}" />
-									</h:commandLink>
+									<h:outputLink value="#{request.contextPath}/j_spring_security_logout" >
+                                    		<!--  rendered="#{userMB.userLoggedIn}"> --> 
+                                    		<h:outputText value="${i18n.logOut}"/>
+                                    </h:outputLink>
 								</li>
-								<li>
-									<!--<i class="icon-eye-open icon-white"></i>--> <h:link
+								<!--<li>
+									<i class="icon-eye-open icon-white"></i> <h:link
 										outcome="protected" value="#{i18n.logIn}"
 										rendered="#{!userMB.userLoggedIn}">
 									</h:link>
-								</li>
+								</li>-->
 								<!-- 
                                 <li>
                                     <!-<i class="icon-shopping-cart icon-white"></i>->
@@ -126,7 +125,7 @@
                                                  class="btn"/>
                             </div>  
                             -->
-							<div style="margin-top: 10px">
+							<div class="clock_tab">
 								<p:clock pattern="HH:mm:ss dd/MM/yyyy" />
 							</div>
 
