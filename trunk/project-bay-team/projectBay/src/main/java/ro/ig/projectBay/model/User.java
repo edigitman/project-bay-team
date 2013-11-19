@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -71,14 +72,21 @@ public class User implements Serializable {
 	 */
 
 	@OneToMany(mappedBy = "userObject")
-	private List<Response> reponsesList;
+	private List<Response> responsesList;
 
 	/**
 	 * The list of proposal that the user has wrote.
 	 */
 
 	@OneToMany(mappedBy = "userObject")
-	private List<Proposal> propositionsList;
+	private List<Proposal> proposalList;
+	
+	/**
+	 * The user's cv.
+	 */
+	@Lob
+	@Column
+	private String cv;
 
 	/**
 	 * Default constructor.
@@ -225,18 +233,18 @@ public class User implements Serializable {
 	 * 
 	 * @return the reponses list
 	 */
-	public List<Response> getReponsesList() {
-		return reponsesList;
+	public List<Response> getResponsesList() {
+		return responsesList;
 	}
 
 	/**
 	 * Sets the reponses list.
 	 * 
-	 * @param reponsesList
+	 * @param responsesList
 	 *            the new reponses list
 	 */
-	public void setReponsesList(List<Response> reponsesList) {
-		this.reponsesList = reponsesList;
+	public void setResponsesList(List<Response> responsesList) {
+		this.responsesList = responsesList;
 	}
 
 	/**
@@ -244,18 +252,37 @@ public class User implements Serializable {
 	 * 
 	 * @return the propositions list
 	 */
-	public List<Proposal> getPropositionsList() {
-		return propositionsList;
+	public List<Proposal> getProposalList() {
+		return proposalList;
 	}
 
 	/**
 	 * Sets the propositions list.
 	 * 
-	 * @param propositionsList
+	 * @param proposalList
 	 *            the new propositions list
 	 */
-	public void setPropositionsList(List<Proposal> propositionsList) {
-		this.propositionsList = propositionsList;
+	public void setProposalList(List<Proposal> proposalList) {
+		this.proposalList = proposalList;
+	}
+
+	/**
+	 * Gets the cv.
+	 * 
+	 * @return the cv
+	 */
+	public String getCv() {
+		return cv;
+	}
+
+	/**
+	 * Sets the cv.
+	 * 
+	 * @param cv
+	 *            the new cv
+	 */
+	public void setCv(String cv) {
+		this.cv = cv;
 	}
 
 	
