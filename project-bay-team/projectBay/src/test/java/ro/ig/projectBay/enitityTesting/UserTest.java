@@ -12,7 +12,8 @@ public class UserTest extends TestCase {
 		super(testName);
 	}
 
-	public void crudTest() {
+	//@Test
+	public void testCrud() {
 		// create
 		User user = createUser1();
 		assertNotNull(user);
