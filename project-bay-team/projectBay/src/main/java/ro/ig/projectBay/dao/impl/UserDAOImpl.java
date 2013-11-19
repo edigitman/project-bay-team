@@ -11,11 +11,11 @@ import ro.ig.projectBay.model.User;
 @Repository
 public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 
-	public User findByUser(String inputUsername) {
+	public User findByEmail(String inputUsername) {
 		User u = new User();
 		try {
 			u =
-					(User) em.createNamedQuery("User.findUsername").setParameter("username", inputUsername)
+					(User) em.createNamedQuery("User.findUserByEmail").setParameter("email", inputUsername)
 							.getSingleResult();
 		} catch (NoResultException e) {
 			System.out.println(e.getMessage());

@@ -14,6 +14,6 @@ public interface UserDAO extends AbstractDAO<User> {
 	 *            the input username
 	 * @return the user
 	 */
-	User findByUser(String inputUsername);
+	User findByEmail(String inputUsername);
 
 }
