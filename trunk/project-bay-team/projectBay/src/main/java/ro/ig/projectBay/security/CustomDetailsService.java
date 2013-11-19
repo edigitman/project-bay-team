@@ -24,7 +24,7 @@ public class CustomDetailsService implements UserDetailsService {
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 
-		User user = userDAO.findByUser(username);
+		User user = userDAO.findByEmail(username);
 
 		// User user =
 		// entityManager.createQuery("from user where email = :username", User.class)
