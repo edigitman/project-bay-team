@@ -149,8 +149,22 @@
 			</div>
 
 			<div class="row-fluid">
+				
+				<!-- MENU -->
+				<div class="span3 well">
+					<ui:insert name="menu">
+						<h:form>
+							<ul>
+								<li><h:commandLink action="protected" value="Default protected"/></li>
+								<li><h:commandLink action="agencies" value="Agencies"/></li>
+							</ul>
+				        </h:form>
+
+					</ui:insert>
+				</div>
+				
 				<!-- CONTENT -->
-				<div class="span9 well">
+				<div class="span9 well body-page">
 					<ui:insert name="body">Default content</ui:insert>
 				</div>
 				<!--/.CONTENT -->
