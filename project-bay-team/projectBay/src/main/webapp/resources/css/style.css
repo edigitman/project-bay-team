@@ -14,3 +14,7 @@ body {
 .row-fluid {
 	width: 95% !important;
 }
+
+.body-page{
+	height: 500px;
+}
