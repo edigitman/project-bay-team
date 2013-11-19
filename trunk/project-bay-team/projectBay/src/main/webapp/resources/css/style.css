@@ -40,3 +40,12 @@ body {
     background: transparent url("#{resource['icons/arrow_refresh.png']}") no-repeat center left;
     padding: 5px 5px 5px 20px;
 }
+
+.clock_tab{
+	margin-top: 10px;
+	width: 300px;
+}
+
+.row-fluid {
+	width: 95% !important;
+}
