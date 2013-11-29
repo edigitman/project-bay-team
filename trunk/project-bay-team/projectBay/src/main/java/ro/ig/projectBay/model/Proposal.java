@@ -29,7 +29,7 @@ public class Proposal implements Serializable{
 	/** The id proposal. */
 	@Id
 	@GeneratedValue
-	private int idProposal;
+	private long idProposal;
 	
 	/** The business id. */
 	@Column(length = 10, unique = true)
@@ -73,7 +73,7 @@ public class Proposal implements Serializable{
 	 *
 	 * @return the id proposal
 	 */
-	public int getIdProposal() {
+	public long getIdProposal() {
 		return idProposal;
 	}
 
@@ -82,7 +82,7 @@ public class Proposal implements Serializable{
 	 *
 	 * @param idProposal the new id proposal
 	 */
-	public void setIdProposal(int idProposal) {
+	public void setIdProposal(long idProposal) {
 		this.idProposal = idProposal;
 	}
 

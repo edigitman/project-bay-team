@@ -33,7 +33,7 @@ public class Collaborator {
 	 */
 	@Id
 	@GeneratedValue
-	private int idCollaborator;
+	private long idCollaborator;
 	
 	
 	/**
@@ -112,7 +112,7 @@ public class Collaborator {
 	 *
 	 * @return the collaborator id
 	 */
-	public int getCollaboratorId() {
+	public long getCollaboratorId() {
 		return idCollaborator;
 	}
 
@@ -121,7 +121,7 @@ public class Collaborator {
 	 *
 	 * @param collaboratorId the new collaborator id
 	 */
-	public void setCollaboratorId(int idCollaborator) {
+	public void setCollaboratorId(long idCollaborator) {
 		this.idCollaborator = idCollaborator;
 	}
 
