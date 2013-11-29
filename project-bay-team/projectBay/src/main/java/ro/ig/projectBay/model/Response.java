@@ -30,7 +30,7 @@ public class Response implements Serializable {
 	 */
 	@Id
 	@GeneratedValue
-	private int idResponse;
+	private long idResponse;
 
 	/**
 	 * The business id.
@@ -100,7 +100,7 @@ public class Response implements Serializable {
 	 *
 	 * @return the id response
 	 */
-	public int getIdResponse() {
+	public long getIdResponse() {
 		return idResponse;
 	}
 
@@ -109,7 +109,7 @@ public class Response implements Serializable {
 	 *
 	 * @param idResponse the new id response
 	 */
-	public void setIdResponse(int idResponse) {
+	public void setIdResponse(long idResponse) {
 		this.idResponse = idResponse;
 	}
 

@@ -1,5 +1,7 @@
 package ro.ig.projectBay.enitityTesting;
 
+import javax.persistence.EntityManager;
+
 import junit.framework.TestCase;
 
 import org.junit.Test;
@@ -8,7 +10,7 @@ import ro.ig.projectBay.model.User;
 
 public class UserTest extends TestCase {
 
-	private javax.persistence.EntityManager em = PersistenceHelper
+	private EntityManager em = PersistenceHelper
 			.getInstance().getEm();
 
 	public UserTest(String testName) {
@@ -71,7 +73,7 @@ public class UserTest extends TestCase {
 
 	private User createUser1() {
 		User user = new User();
-		user.setBusinessId("aaa");
+		user.setBusinessId("IAS");
 		user.setEmail("ioana.ioana@ioana.ioana");
 		user.setFirstName("Ioana");
 		user.setLastName("Apostol");
