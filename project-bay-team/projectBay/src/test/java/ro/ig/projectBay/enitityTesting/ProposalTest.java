@@ -42,7 +42,7 @@ public class ProposalTest extends TestCase {
 		// delete
 		// deleteProposal(proposal);
 
-		em.close();
+		//em.close();
 	}
 
 	private void addProposal(Proposal proposal) {

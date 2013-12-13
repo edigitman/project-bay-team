@@ -40,7 +40,7 @@ public class ResponseTest extends TestCase {
 		// delete
 		// deleteResponse(response);
 
-		em.close();
+		//em.close();
 	}
 
 	private void addResponse(Response response) {
@@ -77,8 +77,8 @@ public class ResponseTest extends TestCase {
 		Response response = new Response();
 		//TODO: response
 		response.setAgency("IAS");
-		response.setBusinessId("kdo2");
-		//response.se
+		response.setBusinessId("kdo3");
+		response.setValidated(true);
 		return response;
 	}
 

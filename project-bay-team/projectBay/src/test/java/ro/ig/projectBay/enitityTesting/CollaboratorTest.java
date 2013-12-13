@@ -40,7 +40,7 @@ public class CollaboratorTest extends TestCase {
 		// delete
 		// deleteCollaborator(collaborator);
 
-		em.close();
+		//em.close();
 	}
 
 	private void addCollaborator(Collaborator collaborator) {
