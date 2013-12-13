@@ -40,7 +40,7 @@ public class UserTest extends TestCase {
 		// delete
 		//deleteUser(user);
 		
-		em.close();
+		//em.close();
 	}
 
 	private void addUser(User user) {
