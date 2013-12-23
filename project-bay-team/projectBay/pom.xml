@@ -109,6 +109,12 @@
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
 			<version>${javax.cdi.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>el-api</artifactId>
+					<groupId>javax.el</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 
@@ -166,14 +172,9 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>${javax.servlet.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
-		<!-- EL -->
-		<dependency>
-			<groupId>org.glassfish.web</groupId>
-			<artifactId>el-impl</artifactId>
-			<version>${glassfish.version}</version>
-		</dependency>
 
 		<!-- LOGGING -->
 		<dependency>
@@ -181,13 +182,12 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
-		
+
 		<!-- JUNIT -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
-
 		</dependency>
 
 	</dependencies>
