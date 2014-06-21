@@ -1,287 +1,178 @@
 package ro.ig.projectBay.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
  * The Class User.
  */
-@SuppressWarnings("serial")
 @Entity(name = "user")
-@NamedQueries({
-		@NamedQuery(name = "User.findUserById", query = "select u from user u where u.idUser= :id"),
-		@NamedQuery(name = "User.findAllUsers", query = "select u from user u"),
-		@NamedQuery(name = "User.findUserByEmail", query = "select u from user u where u.email = :email"),
-		@NamedQuery(name = "User.findUserByEmailAndPassword", query = "select u from user u where u.email = :email and u.password = :password") })
-public class User implements Serializable {
+public class User {
 
-	/**
-	 * The user's ID in the database.
-	 */
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idUser;
-
-	/**
-	 * The business id.
-	 */
-	@Column(length = 10, unique = true)
-	private String businessId;
-
-	/**
-	 * User email.
-	 */
 	@Column
 	private String email;
 
-	/**
-	 * User password.
-	 */
 	@Column
 	private String password;
 
-	/**
-	 * User first name.
-	 */
 	@Column
 	private String firstName;
 
-	/**
-	 * User last name.
-	 */
 	@Column
 	private String lastName;
 
-	/**
-	 * Set of rights.
-	 */
-	@Column
-	private String rights;
-
-	/**
-	 * The list of responses that a user has wrote.
-	 */
+	@Column(name = "active", columnDefinition = "bit")
+	private boolean active;
 
 	@OneToMany(mappedBy = "userObject")
 	private List<Response> responsesList;
 
-	/**
-	 * The list of proposal that the user has wrote.
-	 */
+	@OneToMany(mappedBy = "user")
+	private List<UserRole> userRoles;
+	
+	@OneToMany(mappedBy="employees")
+	private Company employer;
 
-	@OneToMany(mappedBy = "userObject")
-	private List<Proposal> proposalList;
+	@ManyToOne
+	private List<EmailLog> emailReceived;
 
-	/**
-	 * The user's cv.
-	 */
+	@ManyToOne
+	private List<EmailLog> emailSent;
+
+	@ManyToMany(mappedBy = "usersCleared")
+	private List<Project> projectsCleared;
+
+	@ManyToOne
+	@JoinTable(name = "projects_proposed", joinColumns = @JoinColumn(name = "idUser"), inverseJoinColumns = @JoinColumn(name = "idProject"))
+	private List<Project> projectsProposed;
+
 	@Lob
 	@Column
-	private String cv;
+	private byte[] cv;
 
-	/**
-	 * Default constructor.
-	 */
-	public User() {
-		super();
-	}
-
-	/**
-	 * Gets the id user.
-	 * 
-	 * @return the id user
-	 */
 	public long getIdUser() {
 		return idUser;
 	}
 
-	/**
-	 * Sets the id user.
-	 * 
-	 * @param idUser
-	 *            the new id user
-	 */
 	public void setIdUser(long idUser) {
 		this.idUser = idUser;
 	}
 
-	/**
-	 * Gets the business id.
-	 * 
-	 * @return the business id
-	 */
-	public String getBusinessId() {
-		return businessId;
-	}
-
-	/**
-	 * Sets the business id.
-	 * 
-	 * @param businessId
-	 *            the new business id
-	 */
-	public void setBusinessId(String businessId) {
-		this.businessId = businessId;
-	}
-
-	/**
-	 * Gets the email.
-	 * 
-	 * @return the email
-	 */
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * Sets the email.
-	 * 
-	 * @param email
-	 *            the new email
-	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	/**
-	 * Gets the password.
-	 * 
-	 * @return the password
-	 */
 	public String getPassword() {
 		return password;
 	}
 
-	/**
-	 * Sets the password.
-	 * 
-	 * @param password
-	 *            the new password
-	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	/**
-	 * Gets the first name.
-	 * 
-	 * @return the first name
-	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
-	/**
-	 * Sets the first name.
-	 * 
-	 * @param firstName
-	 *            the new first name
-	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	/**
-	 * Gets the last name.
-	 * 
-	 * @return the last name
-	 */
 	public String getLastName() {
 		return lastName;
 	}
 
-	/**
-	 * Sets the last name.
-	 * 
-	 * @param lastName
-	 *            the new last name
-	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	/**
-	 * Gets the rights.
-	 * 
-	 * @return the rights
-	 */
-	public String getRights() {
-		return rights;
+	public boolean isActive() {
+		return active;
 	}
 
-	/**
-	 * Sets the rights.
-	 * 
-	 * @param rights
-	 *            the new rights
-	 */
-	public void setRights(String rights) {
-		this.rights = rights;
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
-	/**
-	 * Gets the reponses list.
-	 * 
-	 * @return the reponses list
-	 */
 	public List<Response> getResponsesList() {
 		return responsesList;
 	}
 
-	/**
-	 * Sets the reponses list.
-	 * 
-	 * @param responsesList
-	 *            the new reponses list
-	 */
 	public void setResponsesList(List<Response> responsesList) {
 		this.responsesList = responsesList;
 	}
 
-	/**
-	 * Gets the propositions list.
-	 * 
-	 * @return the propositions list
-	 */
-	public List<Proposal> getProposalList() {
-		return proposalList;
+	public List<UserRole> getUserRoles() {
+		return userRoles;
 	}
 
-	/**
-	 * Sets the propositions list.
-	 * 
-	 * @param proposalList
-	 *            the new propositions list
-	 */
-	public void setProposalList(List<Proposal> proposalList) {
-		this.proposalList = proposalList;
+	public void setUserRoles(List<UserRole> userRoles) {
+		this.userRoles = userRoles;
 	}
 
-	/**
-	 * Gets the cv.
-	 * 
-	 * @return the cv
-	 */
-	public String getCv() {
+	public Company getEmployer() {
+		return employer;
+	}
+
+	public void setEmployer(Company employer) {
+		this.employer = employer;
+	}
+
+	public List<EmailLog> getEmailReceived() {
+		return emailReceived;
+	}
+
+	public void setEmailReceived(List<EmailLog> emailReceived) {
+		this.emailReceived = emailReceived;
+	}
+
+	public List<EmailLog> getEmailSent() {
+		return emailSent;
+	}
+
+	public void setEmailSent(List<EmailLog> emailSent) {
+		this.emailSent = emailSent;
+	}
+
+	public List<Project> getProjectsCleared() {
+		return projectsCleared;
+	}
+
+	public void setProjectsCleared(List<Project> projectsCleared) {
+		this.projectsCleared = projectsCleared;
+	}
+
+	public List<Project> getProjectsProposed() {
+		return projectsProposed;
+	}
+
+	public void setProjectsProposed(List<Project> projectsProposed) {
+		this.projectsProposed = projectsProposed;
+	}
+
+	public byte[] getCv() {
 		return cv;
 	}
 
-	/**
-	 * Sets the cv.
-	 * 
-	 * @param cv
-	 *            the new cv
-	 */
-	public void setCv(String cv) {
+	public void setCv(byte[] cv) {
 		this.cv = cv;
 	}
 
