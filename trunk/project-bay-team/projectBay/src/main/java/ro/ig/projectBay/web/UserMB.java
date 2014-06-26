@@ -3,26 +3,25 @@ package ro.ig.projectBay.web;
 import java.io.IOException;
 import java.io.Serializable;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.springframework.context.annotation.Scope;
-
 import ro.ig.projectBay.service.UserService;
 
-@Named
-@Scope("session")
+@ManagedBean(name = "userMB")
+@SessionScoped
 public class UserMB implements Serializable {
 
 	private static final long serialVersionUID = -3990573210489057318L;
 
-	@Inject
+	@ManagedProperty(value = "#{userService}")
 	private UserService userService;
 
 	private String username;
@@ -41,6 +40,10 @@ public class UserMB implements Serializable {
 		return null;
 	}
 
+	public String printMsgFromSpring() {
+		return userService.printMessage();
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -57,11 +60,16 @@ public class UserMB implements Serializable {
 		return username;
 	}
 
-	public String printMsgFromSpring() {
-		return userService.printMessage();
-	}
-
 	public boolean isUserLoggedIn() {
 		return false;
 	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	
 }

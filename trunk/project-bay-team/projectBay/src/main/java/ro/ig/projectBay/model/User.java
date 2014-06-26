@@ -7,12 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * The Class User.
@@ -22,12 +19,15 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idUser;
+	private Integer id;
 	@Column
 	private String email;
 
 	@Column
 	private String password;
+
+	@Column(name = "txt_login")
+	private String login;
 
 	@Column
 	private String firstName;
@@ -36,40 +36,60 @@ public class User {
 	private String lastName;
 
 	@Column(name = "active", columnDefinition = "bit")
-	private boolean active;
+	private int active;
 
-	@OneToMany(mappedBy = "userObject")
+	@OneToMany(mappedBy = "responseAuthor")
 	private List<Response> responsesList;
 
 	@OneToMany(mappedBy = "user")
 	private List<UserRole> userRoles;
-	
-	@OneToMany(mappedBy="employees")
+
+	@OneToOne
 	private Company employer;
 
-	@ManyToOne
-	private List<EmailLog> emailReceived;
-
-	@ManyToOne
-	private List<EmailLog> emailSent;
+	/*
+	 * @ManyToOne private List<EmailLog> emailReceived;
+	 * 
+	 * @ManyToOne private List<EmailLog> emailSent;
+	 */
 
 	@ManyToMany(mappedBy = "usersCleared")
 	private List<Project> projectsCleared;
 
-	@ManyToOne
-	@JoinTable(name = "projects_proposed", joinColumns = @JoinColumn(name = "idUser"), inverseJoinColumns = @JoinColumn(name = "idProject"))
+	@OneToMany(mappedBy = "client")
 	private List<Project> projectsProposed;
 
-	@Lob
-	@Column
-	private byte[] cv;
-
-	public long getIdUser() {
-		return idUser;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
-	public void setIdUser(long idUser) {
-		this.idUser = idUser;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getEmail() {
@@ -104,11 +124,11 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public boolean isActive() {
+	public int isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(int active) {
 		this.active = active;
 	}
 
@@ -136,22 +156,6 @@ public class User {
 		this.employer = employer;
 	}
 
-	public List<EmailLog> getEmailReceived() {
-		return emailReceived;
-	}
-
-	public void setEmailReceived(List<EmailLog> emailReceived) {
-		this.emailReceived = emailReceived;
-	}
-
-	public List<EmailLog> getEmailSent() {
-		return emailSent;
-	}
-
-	public void setEmailSent(List<EmailLog> emailSent) {
-		this.emailSent = emailSent;
-	}
-
 	public List<Project> getProjectsCleared() {
 		return projectsCleared;
 	}
@@ -168,12 +172,12 @@ public class User {
 		this.projectsProposed = projectsProposed;
 	}
 
-	public byte[] getCv() {
-		return cv;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setCv(byte[] cv) {
-		this.cv = cv;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 }

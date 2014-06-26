@@ -108,15 +108,6 @@
 										rendered="#{!userMB.userLoggedIn}">
 									</h:link>
 								</li>-->
-								<!-- 
-                                <li>
-                                    <!-<i class="icon-shopping-cart icon-white"></i>->
-                                    <h:link outcome="showcart" value="#{i18n.shoppingCart}"
-                                            rendered="#{!shoppingCartController.shoppingCartIsEmpty()}">
-                                        <f:param name="cid" value="#{javax.enterprise.context.conversation.id}"/>
-                                    </h:link>
-                                </li>
-                                -->
 							</ul>
 							<!-- 
                             <div class="navbar-search">
@@ -157,6 +148,7 @@
 							<ul>
 								<li><h:commandLink action="protected" value="Default protected"/></li>
 								<li><h:commandLink action="agencies" value="Agencies"/></li>
+								<!-- TODO: add menu -->
 							</ul>
 				        </h:form>
 

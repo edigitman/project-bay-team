@@ -3,16 +3,13 @@ package ro.ig.projectBay.model;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * The Class Response.
@@ -26,7 +23,7 @@ public class Response implements Serializable {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idAnswer;
+	private Integer id;
 
 	/**
 	 * The actual text response.
@@ -44,26 +41,85 @@ public class Response implements Serializable {
 	 * The validation status for the response.
 	 */
 	@Column
-	private boolean validated;
+	private int validated;
 
 	/**
 	 * The refused status for the response.
 	 */
 	@Column
-	private boolean denied;
-
-	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST,
-			CascadeType.REFRESH })
-	@JoinTable(name = "answer", joinColumns = @JoinColumn(name = "idAnswer"), inverseJoinColumns = @JoinColumn(name = "idUser"))
-	private List<User> users;
+	private int denied;
 
 	@ManyToOne
-	private User userObject;
+	private User responseAuthor;
 
-	/**
-	 * The proposal for which the response was written.
-	 */
 	@ManyToOne
 	private Project project;
+
+	@OneToMany(mappedBy = "response")
+	private List<Collaborator> collaboratorsList;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getResponse() {
+		return response;
+	}
+
+	public void setResponse(String response) {
+		this.response = response;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int isValidated() {
+		return validated;
+	}
+
+	public void setValidated(int validated) {
+		this.validated = validated;
+	}
+
+	public int isDenied() {
+		return denied;
+	}
+
+	public void setDenied(int denied) {
+		this.denied = denied;
+	}
+
+	public User getResponseAuthor() {
+		return responseAuthor;
+	}
+
+	public void setResponseAuthor(User responseAuthor) {
+		this.responseAuthor = responseAuthor;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public List<Collaborator> getCollaboratorsList() {
+		return collaboratorsList;
+	}
+
+	public void setCollaboratorsList(List<Collaborator> collaboratorsList) {
+		this.collaboratorsList = collaboratorsList;
+	}
 
 }

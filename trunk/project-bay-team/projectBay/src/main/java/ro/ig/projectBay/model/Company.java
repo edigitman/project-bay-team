@@ -7,14 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity(name = "company")
 public class Company {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idUser;
+	private Integer id;
 
 	@Column
 	private String name;
@@ -23,17 +24,34 @@ public class Company {
 	@Column
 	private String url;
 	@Column
-	private String CUI;
+	private String cui;
+	@OneToOne
+	private User da;
+	@OneToMany(mappedBy = "company")
+	private List<Collaborator> employeeList;
 
-	@ManyToOne
-	private List<User> employees;
-
-	public long getIdUser() {
-		return idUser;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdUser(long idUser) {
-		this.idUser = idUser;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public User getDa() {
+		return da;
+	}
+
+	public void setDa(User da) {
+		this.da = da;
+	}
+
+	public List<Collaborator> getEmployeeList() {
+		return employeeList;
+	}
+
+	public void setEmployeeList(List<Collaborator> employeeList) {
+		this.employeeList = employeeList;
 	}
 
 	public String getName() {
@@ -60,22 +78,12 @@ public class Company {
 		this.url = url;
 	}
 
-	public String getCUI() {
-		return CUI;
+	public String getCui() {
+		return cui;
 	}
 
-	public void setCUI(String cUI) {
-		CUI = cUI;
+	public void setCui(String cui) {
+		this.cui = cui;
 	}
-
-	public List<User> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(List<User> employees) {
-		this.employees = employees;
-	}
-	
-	
 
 }

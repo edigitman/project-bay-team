@@ -6,26 +6,30 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import ro.ig.projectBay.model.User;
 
-
-public class CustomUserDetails implements UserDetails{
+@Component
+public class CustomUserDetails implements UserDetails {
 
 	private static final long serialVersionUID = 3026412236300362357L;
-	
+
 	private User user;
-	
+
+	public CustomUserDetails() {
+	}
+
 	public CustomUserDetails(User user) {
 		this.user = user;
 	}
-	
+
 	@Override
 	public Collection<GrantedAuthority> getAuthorities() {
-		
+
 		Collection<GrantedAuthority> auth = new ArrayList<>();
-		auth.add(new GrantedAuthorityImpl("USER") );
-		
+		auth.add(new GrantedAuthorityImpl("USER"));
+
 		return auth;
 	}
 

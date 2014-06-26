@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/template/defaultLayout.xhtml">
+
+	<ui:define name="title">Project Bay</ui:define>
+
+	<ui:define name="body">
+
+		<h:form id="proposalOverviewClientForm" style="width:95%">
+
+			<p:dataTable id="projectList" var="prop" rowIndexVar="rowindex"
+				value="#{projectsOverviewBB.projectsProposed}" editable="true">
+
+				<f:facet name="header">#{i18n.projectsOverview}</f:facet>
+
+				<p:column headerText="#{i18n.clientName}" filterBy="#{prop.client}"
+					filterMatchMode="contains" sortBy="#{prop.client}"
+					style="width:150px">
+					<h:outputText value="#{prop.client}" />
+				</p:column>
+				<p:column headerText="#{i18n.projectName}" sortBy="#{prop.project}"
+					style="width:150px">
+					<h:outputText value="#{prop.project}" style="width:150px" />
+				</p:column>
+				<p:column headerText="#{i18n.description}"
+					sortBy="#{prop.description}" style="width:20px">
+					<p:rowToggler />
+				</p:column>
+				<p:column headerText="#{i18n.startDate}" sortBy="#{prop.startDate}"
+					style="width:30px">
+					<div align="center">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{prop.startDate}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:calendar value="#{prop.startDate}" style="width:30px"
+									navigator="true" pattern="yyyy/MM/dd" readOnlyInputText="true"
+									converter="dateConverter">
+								</p:calendar>
+							</f:facet>
+						</p:cellEditor>
+					</div>
+				</p:column>
+				<p:column headerText="#{i18n.endDate}" sortBy="#{prop.endDate}"
+					style="width:50px">
+					<div align="center">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{prop.endDate}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:calendar value="#{prop.endDate}" style="width:30px"
+									navigator="true" pattern="yyyy/MM/dd" readOnlyInputText="true"
+									converter="dateConverter">
+								</p:calendar>
+							</f:facet>
+						</p:cellEditor>
+					</div>
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

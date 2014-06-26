@@ -4,40 +4,38 @@ import java.io.Serializable;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
 
-import org.springframework.context.annotation.Scope;
-
-@Named
-@Scope("session")
-public class LocaleMB implements Serializable{
+@ManagedBean(name = "localeMB")
+@SessionScoped
+public class LocaleMB implements Serializable {
 
 	private static final long serialVersionUID = 905375762230221180L;
-	
 
 	private Locale locale;
-	
+
 	@PostConstruct
-	public void init(){
-		locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();	
+	public void init() {
+		locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
 	}
 
-    // ======================================
-    // =          Business methods          =
-    // ======================================
+	// ======================================
+	// = Business methods =
+	// ======================================
 
-    public Locale getLocale() {
-        return locale;
-    }
+	public Locale getLocale() {
+		return locale;
+	}
 
-    public String getLanguage() {
-        return locale.getLanguage();
-    }
+	public String getLanguage() {
+		return locale.getLanguage();
+	}
 
-    public void setLanguage(String language) {
-        locale = new Locale(language);
-        FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
-    }
-	
+	public void setLanguage(String language) {
+		locale = new Locale(language);
+		FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
+	}
+
 }

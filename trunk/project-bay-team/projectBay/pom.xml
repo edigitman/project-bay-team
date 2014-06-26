@@ -1,7 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ro.project.i</groupId>
+	<groupId>ro.project.ig</groupId>
 	<artifactId>projectBay</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
@@ -9,7 +10,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<spring.version>3.0.5.RELEASE</spring.version>
+		<spring.version>3.0.7.RELEASE</spring.version>
 		<spring.security.version>3.0.5.RELEASE</spring.security.version>
 		<JSR-330.version>1</JSR-330.version>
 		<jsf.sun.version>2.1.13</jsf.sun.version>
@@ -19,16 +20,17 @@
 		<version.openejb.javaee-api>6.0</version.openejb.javaee-api>
 		<version.arquillian>1.0.2.Final</version.arquillian>
 		<javax.cdi.version>1.1</javax.cdi.version>
-		<primefaces.version>3.5</primefaces.version>
-		<primefaces.themes.version>1.0.6</primefaces.themes.version>
-		<primefaces.ext.version>0.6.3</primefaces.ext.version>
+		<primefaces.version>4.0</primefaces.version>
+		<primefaces.themes.version>1.0.8</primefaces.themes.version>
+		<primefaces.ext.version>1.0.0</primefaces.ext.version>
 		<webjars.bootstrap.version>2.3.2</webjars.bootstrap.version>
 		<webjars.jquery.version>1.9.1</webjars.jquery.version>
 		<hibernate.manager.version>4.1.1.Final</hibernate.manager.version>
 		<hibernate.validator.version>4.1.0.Final</hibernate.validator.version>
 		<mysql.driver.version>5.1.23</mysql.driver.version>
-		<slf4j.version>1.5.5</slf4j.version>
+		<slf4j.version>1.7.5</slf4j.version>
 		<junit.version>4.11</junit.version>
+		<org.slf4j.version>1.7.7</org.slf4j.version>
 	</properties>
 
 	<!-- Custom repositories -->
@@ -41,6 +43,17 @@
 	</repositories>
 
 	<dependencies>
+		<!-- Spring framework -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 
 		<!-- Spring Security -->
 		<dependency>
@@ -48,39 +61,55 @@
 			<artifactId>spring-security-core</artifactId>
 			<version>${spring.security.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>${spring.security.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring.security.version}</version>
 		</dependency>
 
-		<!-- Persistence -->
-
+		<!-- SPRING DATA JPA -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>1.3.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+		</dependency>
 
+		<!-- HIBERNATE -->
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.1.Final</version>
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.manager.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate.validator.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -93,10 +122,13 @@
 			<artifactId>primefaces</artifactId>
 			<version>${primefaces.version}</version>
 		</dependency>
+
+		<!-- <dependency> <groupId>org.primefaces.themes</groupId> <artifactId>hot-sneaks</artifactId> 
+			<version>${primefaces.themes.version}</version> </dependency> -->
 		<dependency>
-			<groupId>org.primefaces.themes</groupId>
-			<artifactId>hot-sneaks</artifactId>
-			<version>${primefaces.themes.version}</version>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces.extensions</groupId>
@@ -117,7 +149,6 @@
 			</exclusions>
 		</dependency>
 
-
 		<!-- Web Jars for UI -->
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -128,19 +159,6 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>jquery</artifactId>
 			<version>${webjars.jquery.version}</version>
-		</dependency>
-
-		<!-- Spring framework -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 
 		<!-- JSR-330 -->
@@ -175,12 +193,11 @@
 			<scope>provided</scope>
 		</dependency>
 
-
 		<!-- LOGGING -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j.version}</version>
+			<version>${org.slf4j.version}</version>
 		</dependency>
 
 		<!-- JUNIT -->
@@ -189,11 +206,9 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
-		<finalName>projectBay</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -206,4 +221,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
