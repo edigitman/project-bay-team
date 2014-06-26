@@ -1,27 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-	 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-	  http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
-	   http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
-	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="
+	 http://www.springframework.org/schema/beans 
+	 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	 http://www.springframework.org/schema/tx 
+	 http://www.springframework.org/schema/tx/spring-tx.xsd
+	 http://www.springframework.org/schema/jee 
+	 http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+	 http://www.springframework.org/schema/jdbc 
+	 http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+	 http://www.springframework.org/schema/context
+	 http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	 http://www.springframework.org/schema/data/jpa 
+     http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+     http://www.springframework.org/schema/jdbc 
+     http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!--  <context:component-scan base-package="de.slackspace.tutorials.customloginpage" /> -->
+	<!-- <context:component-scan base-package="de.slackspace.tutorials.customloginpage" 
+		/> -->
 	<context:annotation-config />
 	<context:component-scan base-package="ro.ig.projectBay" />
-	
-	
-	
-	<!--  <jee:jndi-lookup id="dataSource" jndi-name="persistence-units/projectBay" expected-type="javax.sql.DataSource" /> -->
-		
-	<bean id="myEmf" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
-      <property name="persistenceUnitName" value="projectBay"/>
-   </bean>
-		
-		
+
+
+
+	<!-- <jee:jndi-lookup id="dataSource" jndi-name="persistence-units/projectBay" 
+		expected-type="javax.sql.DataSource" /> -->
+
+	<bean id="myEmf"
+		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="auctionHouse" />
+	</bean>
+	<bean
+		class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
+	<bean
+		class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
+	<bean
+		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<jpa:repositories base-package="ro.ig.projectBay.dao" />
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/P5_GEI" />
+		<property name="username" value="root" />
+		<property name="password" value="ioana" />
+	</bean>
+
 </beans>
