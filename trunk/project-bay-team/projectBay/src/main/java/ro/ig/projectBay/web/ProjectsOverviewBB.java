@@ -42,6 +42,10 @@ public class ProjectsOverviewBB {
 
 	}
 
+	public void OnSettingCurrentProject(Project project) {
+		projectService.setCurrentProject(project);
+	}
+
 	public ProjectService getProjectService() {
 		return projectService;
 	}

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ro.ig.projectBay.dao.ProjectDAO;
+import ro.ig.projectBay.dao.UserDAO;
 import ro.ig.projectBay.model.Project;
 import ro.ig.projectBay.model.User;
 import ro.ig.projectBay.service.ProjectService;
@@ -16,7 +17,11 @@ import ro.ig.projectBay.service.ProjectService;
 public class ProjectServiceImpl implements ProjectService {
 
 	@Autowired
-	ProjectDAO projectDAO;
+	private ProjectDAO projectDAO;
+
+	@Autowired
+	private UserDAO userDAO;
+	private Project currentProject;
 
 	@Override
 	public List<Project> findByClient(User client) {
@@ -24,8 +29,32 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Project> getProjectsByUserCleared(User userDA) {
-		return projectDAO.getProjectsByUserCleared(userDA);
+	public List<Project> getProjectsByUserCleared(Integer userId) {
+		return userDAO.getProjectsByUserCleared(userId);
+	}
+
+	public ProjectDAO getProjectDAO() {
+		return projectDAO;
+	}
+
+	public void setProjectDAO(ProjectDAO projectDAO) {
+		this.projectDAO = projectDAO;
+	}
+
+	public Project getCurrentProject() {
+		return currentProject;
+	}
+
+	public void setCurrentProject(Project currentProject) {
+		this.currentProject = currentProject;
+	}
+
+	public UserDAO getUserDAO() {
+		return userDAO;
+	}
+
+	public void setUserDAO(UserDAO userDAO) {
+		this.userDAO = userDAO;
 	}
 
 }

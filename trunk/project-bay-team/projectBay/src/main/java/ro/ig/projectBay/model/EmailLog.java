@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-@Entity(name = "email_log")
+@Entity
 public class EmailLog {
 
 	@Id

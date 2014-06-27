@@ -9,6 +9,10 @@ public interface ProjectService {
 
 	public List<Project> findByClient(User client);
 
-	public List<Project> getProjectsByUserCleared(User userDA);
+	public List<Project> getProjectsByUserCleared(Integer userId);
+
+	public Project getCurrentProject();
+
+	public void setCurrentProject(Project currentProject);
 
 }

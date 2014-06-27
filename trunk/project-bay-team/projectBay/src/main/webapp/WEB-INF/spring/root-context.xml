@@ -21,17 +21,13 @@
      http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- <context:component-scan base-package="de.slackspace.tutorials.customloginpage" 
-		/> -->
 	<context:annotation-config />
 	<context:component-scan base-package="ro.ig.projectBay" />
 
-
-
-	<!-- <jee:jndi-lookup id="dataSource" jndi-name="persistence-units/projectBay" 
+	<!-- <jee:jndi-lookup id="dataSource" jndi-name="persistence-units/auctionHouse" 
 		expected-type="javax.sql.DataSource" /> -->
 
-	<bean id="myEmf"
+	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="auctionHouse" />
 	</bean>
@@ -43,7 +39,9 @@
 		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
 	<jpa:repositories base-package="ro.ig.projectBay.dao" />
+
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />

@@ -30,7 +30,7 @@ public class ProjectsOverviewDABB {
 	public void init() {
 		projectsCleared = new ArrayList<Project>();
 		projectsCleared = projectService.getProjectsByUserCleared(userService
-				.getCurrentUser());
+				.getCurrentUser().getId());
 	}
 
 	public void onEdit(RowEditEvent event) {
@@ -40,6 +40,10 @@ public class ProjectsOverviewDABB {
 
 	public void onCancel(RowEditEvent event) {
 
+	}
+
+	public void OnSettingCurrentProject(Project project) {
+		projectService.setCurrentProject(project);
 	}
 
 	public ProjectService getProjectService() {
