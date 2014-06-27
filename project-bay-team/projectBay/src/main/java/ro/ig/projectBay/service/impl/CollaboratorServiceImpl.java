@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ro.ig.projectBay.dao.CollaboratorDAO;
 import ro.ig.projectBay.model.Collaborator;
 import ro.ig.projectBay.service.CollaboratorService;
 
@@ -14,10 +15,10 @@ import ro.ig.projectBay.service.CollaboratorService;
 public class CollaboratorServiceImpl implements CollaboratorService {
 
 	@Autowired
-	CollaboratorService collaboratorService;
+	CollaboratorDAO collaboratorDAO;
 
 	@Override
 	public List<Collaborator> getCollaboratorsByCompanyId(Integer id) {
-		return collaboratorService.getCollaboratorsByCompanyId(id);
+		return collaboratorDAO.getCollaboratorsByCompanyId(id);
 	}
 }

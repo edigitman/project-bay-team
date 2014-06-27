@@ -14,9 +14,8 @@ import javax.persistence.OneToMany;
 /**
  * The Class Response.
  */
-@SuppressWarnings("serial")
-@Entity(name = "response")
-public class Response implements Serializable {
+@Entity
+public class Response  {
 
 	/**
 	 * The response's ID in the database.

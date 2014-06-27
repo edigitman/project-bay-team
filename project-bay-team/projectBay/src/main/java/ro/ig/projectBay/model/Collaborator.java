@@ -1,6 +1,5 @@
 package ro.ig.projectBay.model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,26 +14,26 @@ public class Collaborator {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(length = 255)
 	private String LastName;
-	
+
 	@Column(length = 255)
 	private String firstName;
-	
+
 	@Column(length = 255)
 	private String position;
-	
+
 	@Column(length = 255)
 	private String technology;
-	
+
 	@Column
 	private double salary;
-	
+
 	@Lob
 	@Column
 	private byte[] cv;
-	
+
 	@ManyToOne
 	private Company company;
 
@@ -113,6 +112,4 @@ public class Collaborator {
 		this.response = response;
 	}
 
-	
 }
-

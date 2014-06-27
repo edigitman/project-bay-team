@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 /**
  * The Class User.
  */
-@Entity(name = "user")
+@Entity
 public class User {
 
 	@Id
