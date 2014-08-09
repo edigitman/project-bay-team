@@ -25,9 +25,12 @@ public class CustomDetailsService implements UserDetailsService {
 		CustomUserDetails userDetails = null;
 
 		try {
-			user = userService.findByEmail(username);
+			user = userService.findByLogin(username);
+			/*List<String> ur = userService.getUserRoleForUser(user.getId());
+			userService.setCurrentUsersRoles(ur);*/
 			userService.setCurrentUser(user);
 			userDetails = new CustomUserDetails(user);
+
 		} catch (Exception e) {
 			// TODO: logger
 			System.out.println(e.getStackTrace());

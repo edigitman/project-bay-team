@@ -15,4 +15,6 @@ public interface ProjectService {
 
 	public void setCurrentProject(Project currentProject);
 
+	public void addProject(Project project);
+
 }

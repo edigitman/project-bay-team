@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/template/defaultLayout.xhtml">
+
+	<ui:define name="title">Project Bay</ui:define>
+
+	<ui:define name="body">
+
+		<h:form id="addProposal" enctype="multipart/form-data">
+			<p:messages id="messagesAddPropositions" autoUpdate="true"
+				closable="true" />
+			<p:panelGrid id="AddProposalPanel" columns="2">
+
+				<h:outputLabel for="projectTitle" value="#{i18n.projectName}:" />
+				<p:inputText maxlength="255" id="projectTitle"
+					value="#{addProjectBB.newProject.title}" />
+
+				<h:outputLabel for="description" value="#{i18n.description}:" />
+				<p:inputTextarea rows="3" cols="30" maxlength="255" id="description"
+					value="#{addProjectBB.newProject.description}" autoResize="false" />
+
+				<h:outputText value="#{i18n.startDate}:" />
+				<p:calendar id="startDate"
+					value="#{addProjectBB.newProject.startDate}" />
+
+				<h:outputText value="#{i18n.endDate}:" />
+				<p:calendar id="endDate" value="#{addProjectBB.newProject.endDate}" />
+
+				<h:outputText value="#{i18n.price}:" />
+				<p:inputText value="#{addProjectBB.newProject.price}" id="price">
+					<pe:keyFilter for="price" mask="num" />
+				</p:inputText>
+
+				<h:outputLabel for="upload" value="#{i18n.documentation}:" />
+				<p:fileUpload id="upload"
+					fileUploadListener="#{addProjectBB.fileUpload}" mode="advanced"
+					auto="true" label="UPLOAD" />
+
+			</p:panelGrid>
+
+			<p:commandButton action="#{addProjectBB.addProject}"
+				value="#{i18n.save}" />
+			<p:commandButton value="#{i18n.cancel}" immediate="true"
+				action="currentProjects?faces-redirect=true" />
+		</h:form>
+	</ui:define>
+</ui:composition>

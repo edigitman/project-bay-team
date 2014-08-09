@@ -2,19 +2,27 @@ package ro.ig.projectBay.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import ro.ig.projectBay.util.PersistenceListener;
 
 /**
  * The Class User.
  */
 @Entity
+@EntityListeners(PersistenceListener.class)
 public class User {
 
 	@Id
@@ -41,8 +49,14 @@ public class User {
 	@OneToMany(mappedBy = "responseAuthor")
 	private List<Response> responsesList;
 
-	@OneToMany(mappedBy = "user")
-	private List<UserRole> userRoles;
+	/*
+	 * @OneToMany(mappedBy = "user") private List<UserRole> userRoles;
+	 */
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE,
+			CascadeType.PERSIST, CascadeType.REFRESH })
+	@JoinTable(name = "UserRole", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_role"))
+	List<Role> roleList;
 
 	@OneToOne
 	private Company employer;
@@ -140,12 +154,16 @@ public class User {
 		this.responsesList = responsesList;
 	}
 
-	public List<UserRole> getUserRoles() {
-		return userRoles;
+	public List<Role> getRoleList() {
+		return roleList;
 	}
 
-	public void setUserRoles(List<UserRole> userRoles) {
-		this.userRoles = userRoles;
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
+	}
+
+	public int getActive() {
+		return active;
 	}
 
 	public Company getEmployer() {

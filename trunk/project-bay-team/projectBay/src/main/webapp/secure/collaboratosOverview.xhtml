@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/template/defaultLayout.xhtml">
+
+	<ui:define name="title">Project Bay</ui:define>
+
+	<ui:define name="body">
+
+		<h:form id="collaboratorsOverviewForm" style="width:95%">
+
+			<p:dataTable id="collaboratorsList" var="collaborator"
+				rowIndexVar="rowindex"
+				value="#{collaboratorsOverviewBB.collaborators}" editable="true">
+
+				<f:facet name="header">#{i18n.projectsOverview}</f:facet>
+
+				<p:column headerText="#{i18n.collaborator}"
+					filterBy="#{collaboratosName.lastName} #{collaboratosName.firstName}"
+					filterMatchMode="contains" sortBy="#{collaboratosName.lastName}">
+					<h:outputText
+						value="#{collaboratosName.lastName} #{collaboratosName.firstName}" />
+				</p:column>
+				<p:column headerText="#{i18n.collaboratorsPosition}"
+					filterMatchMode="contains" filterBy="#{collaborator.position}"
+					sortBy="#{collaborator.position}">
+					<h:outputText value="#{collaborator.position}" />
+				</p:column>
+				<p:column headerText="#{i18n.collaboratorsSalary}"
+					sortBy="#{collaborator.collaboratorsSalary}">
+					<h:outputText value="#{collaborator.collaboratorsSalary}" />
+				</p:column>
+				<p:column headerText="#{i18n.collaboratorsCV}">
+					<p:commandLink id="downloadLink" value="#{i18n.collaboratorsCV}"
+						ajax="false"
+						disabled="#{collaboratorsOverviewBB.renderDownloadLink(collaborator)}">
+						<p:fileDownload
+							value="#{collaborateursBean.fileDownload(collaborateurs)}" />
+					</p:commandLink>
+				</p:column>
+				<p:column headerText="#{i18n.edit}">
+					<p:commandButton icon="ui-icon-pencil" action=""/>
+				</p:column>
+				<p:column headerText="#{i18n.delete}">
+					<p:commandButton icon="ui-icon-closethick" action=""/>
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

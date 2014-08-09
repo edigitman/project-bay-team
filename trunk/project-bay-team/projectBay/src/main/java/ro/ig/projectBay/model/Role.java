@@ -4,12 +4,16 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+
+import ro.ig.projectBay.util.PersistenceListener;
 
 @Entity
+@EntityListeners(PersistenceListener.class)
 public class Role {
 
 	/**
@@ -17,26 +21,29 @@ public class Role {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column
 	private Integer id;
 
 	/**
 	 * The txt_role_code.
 	 */
-	@Column(name = "role_code")
+	@Column
 	private String code;
 
 	/**
 	 * The role name in English.
 	 */
-	@Column(name = "role_name_en")
+	@Column
 	private String roleTitle;
 
 	/**
 	 * The user roles.
 	 */
-	@OneToMany(mappedBy = "role")
-	private List<UserRole> userRoles;
+	/*
+	 * @OneToMany(mappedBy = "role") private List<UserRole> userRoles;
+	 */
+	@ManyToMany(mappedBy = "roleList")
+	List<User> users;
 
 	public Integer getId() {
 		return id;
@@ -62,12 +69,11 @@ public class Role {
 		this.roleTitle = roleTitle;
 	}
 
-	public List<UserRole> getUserRoles() {
-		return userRoles;
-	}
-
-	public void setUserRoles(List<UserRole> userRoles) {
-		this.userRoles = userRoles;
-	}
+	/*
+	 * public List<UserRole> getUserRoles() { return userRoles; }
+	 * 
+	 * public void setUserRoles(List<UserRole> userRoles) { this.userRoles =
+	 * userRoles; }
+	 */
 
 }

@@ -9,8 +9,6 @@ import ro.ig.projectBay.model.User;
 
 public interface ProjectDAO extends JpaRepository<Project, String> {
 
-	
 	public List<Project> findByClient(User client);
 
-	
 }

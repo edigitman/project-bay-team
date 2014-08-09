@@ -33,6 +33,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return userDAO.getProjectsByUserCleared(userId);
 	}
 
+	@Override
+	public void addProject(Project project) {
+		projectDAO.saveAndFlush(project);
+	}
+
 	public ProjectDAO getProjectDAO() {
 		return projectDAO;
 	}
