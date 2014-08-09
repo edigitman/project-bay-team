@@ -8,8 +8,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-import org.primefaces.event.RowEditEvent;
-
 import ro.ig.projectBay.model.Project;
 import ro.ig.projectBay.service.ProjectService;
 import ro.ig.projectBay.service.UserService;
@@ -19,7 +17,7 @@ import ro.ig.projectBay.service.UserService;
 public class ProjectsOverviewBB {
 
 	@ManagedProperty(value = "#{projectService}")
-	ProjectService projectService;
+	private ProjectService projectService;
 
 	@ManagedProperty(value = "#{userService}")
 	private UserService userService;
@@ -33,13 +31,9 @@ public class ProjectsOverviewBB {
 				.getCurrentUser());
 	}
 
-	public void onEdit(RowEditEvent event) {
-		// Project proposalToUpdate = (Project) event.getObject();
-		// Project.editProposal(proposalToUpdate);
-	}
-
-	public void onCancel(RowEditEvent event) {
-
+	public String toProjectDetails(Project currentProject) {
+		projectService.setCurrentProject(currentProject);
+		return "projectDetails?faces-redirect=true";
 	}
 
 	public void OnSettingCurrentProject(Project project) {

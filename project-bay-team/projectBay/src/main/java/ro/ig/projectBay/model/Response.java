@@ -1,6 +1,5 @@
 package ro.ig.projectBay.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,7 +14,7 @@ import javax.persistence.OneToMany;
  * The Class Response.
  */
 @Entity
-public class Response  {
+public class Response {
 
 	/**
 	 * The response's ID in the database.
@@ -81,7 +80,7 @@ public class Response  {
 		this.price = price;
 	}
 
-	public int isValidated() {
+	public int getValidated() {
 		return validated;
 	}
 
@@ -89,7 +88,7 @@ public class Response  {
 		this.validated = validated;
 	}
 
-	public int isDenied() {
+	public int getDenied() {
 		return denied;
 	}
 

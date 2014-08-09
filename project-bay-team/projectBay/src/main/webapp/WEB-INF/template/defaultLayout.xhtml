@@ -13,7 +13,7 @@
 	<h:head>
 		<link rel="shortcut icon" type="image/x-icon"
 			href="#{request.contextPath}/resources/images/jobs.jpg" />
-		<title><ui:insert name="title">Default title</ui:insert></title>
+		<title><ui:insert name="title">Auction House</ui:insert></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- Bootstrap -->
 		<h:outputStylesheet library="css" name="style.css" />
@@ -45,7 +45,7 @@
 
 					<h:form>
 						<!-- Brand -->
-						<h:link class="brand" outcome="/default">Project Bay
+						<h:link class="brand" outcome="/default">Auction House
                             <f:param name="cid"
 								value="#{javax.enterprise.context.conversation.id}" />
 						</h:link>
@@ -86,40 +86,21 @@
 						<div class="nav-collapse collapse nav pull-right">
 
 							<ul class="nav">
-								<!-- 
-                                <li>
-                                    <!-<i class="icon-user icon-white"></i>->
-                                    <h:link outcome="showaccount"
-                                            value="#{i18n.welcome} #{accountController.loggedinCustomer.firstname}"
-                                            rendered="#{accountController.loggedIn}">
-                                        <f:param name="cid" value="#{javax.enterprise.context.conversation.id}"/>
-                                    </h:link>
-                                </li>
-                                -->
-								<li>
-									<h:outputLink value="#{request.contextPath}/j_spring_security_logout" >
-                                    		<!--  rendered="#{userMB.userLoggedIn}"> --> 
-                                    		<h:outputText value="${i18n.logOut}"/>
-                                    </h:outputLink>
-								</li>
-								<!--<li>
-									<i class="icon-eye-open icon-white"></i> <h:link
-										outcome="protected" value="#{i18n.logIn}"
-										rendered="#{!userMB.userLoggedIn}">
-									</h:link>
-								</li>-->
+								<!-- sign in -->
+								<li><h:outputLink
+										value="#{request.contextPath}/j_spring_security_logout">
+										<!--  rendered="#{userMB.userLoggedIn}"> -->
+										<h:outputText value="${i18n.logOut}" />
+									</h:outputLink></li>
+								<!-- sign up -->
+								<li><h:outputLink
+										value="#{request.contextPath}/j_spring_security_logout">
+										<h:outputText value="${i18n.logOut}" />
+									</h:outputLink></li>
 							</ul>
-							<!-- 
-                            <div class="navbar-search">
-                                <h:inputText class="search-query" value="#{catalogController.keyword}"/>
-                                <h:commandButton action="#{catalogController.doSearch}" value="#{i18n.search}"
-                                                 class="btn"/>
-                            </div>  
-                            -->
 							<div class="clock_tab">
 								<p:clock pattern="HH:mm:ss dd/MM/yyyy" />
 							</div>
-
 						</div>
 						<!--/ Buttons on the right -->
 					</h:form>
@@ -140,50 +121,61 @@
 			</div>
 
 			<div class="row-fluid">
-				
+
 				<!-- MENU -->
 				<div class="span3 well">
 					<ui:insert name="menu">
-						<h:form>
+						<h:form rendered="#{request.isUserInRole('ROLE_CLIENT')}">
 							<ul>
-								<li><h:commandLink action="protected" value="Default protected"/></li>
-								<li><h:commandLink action="agencies" value="Agencies"/></li>
+								<li><h:commandLink action="currentProjects"
+										value="My Active Projects"
+										rendered="#{request.isUserInRole('ROLE_CLIENT')}" />
+									<ul>
+										<li><h:commandLink action="addProject"
+												value="Add Project"
+												rendered="#{request.isUserInRole('ROLE_CLIENT')}" /></li>
+									</ul></li>
+								<li><h:commandLink action="agencies" value="Agencies" /></li>
+
+							</ul>
+						</h:form>
+						<h:form rendered="#{request.isUserInRole('ROLE_DA')}">
+							<ul>
+								<li><h:commandLink action="clearedProjects"
+										value="Projects" rendered="#{request.isUserInRole('ROLE_DA')}" /></li>
 								<!-- TODO: add menu -->
 							</ul>
-				        </h:form>
-
+						</h:form>
 					</ui:insert>
 				</div>
-				
+
 				<!-- CONTENT -->
 				<div class="span9 well body-page">
 					<ui:insert name="body">Default content</ui:insert>
 				</div>
 				<!--/.CONTENT -->
-
 			</div>
 		</div>
 
 		<!-- FOOTER -->
 		<div class="container-fluid">
 			<div class="row-fluid well">
-				<div class="span3 text-center">
+				<!-- <div class="span3 text-center">
 					<a href="#">Source code on GitHub</a>
-				</div>
+				</div> -->
 				<div class="span6 text-center">
-					<a class="muted credit" href="#">Autor</a>
+					<a class="muted credit" href="#">Gosav Ioana-Iulia</a>
 				</div>
 			</div>
 		</div>
 		<!--/.FOOTER -->
 
-
 		<!-- Le javascript
        ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<h:outputScript name="webjars/jquery/1.9.1/jquery.min.js" />
+		<!-- <h:outputScript name="webjars/jquery/1.9.1/jquery.min.js" />
 		<h:outputScript library="webjars/bootstrap/2.3.2/js"
-			name="bootstrap.min.js" />
+			name="bootstrap.min.js" /> -->
 	</h:body>
 </f:view>
 </html>

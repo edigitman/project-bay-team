@@ -5,6 +5,11 @@
 	http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
 	version="2.1">
 
+	<converter>
+		<converter-id>dateConverter</converter-id>
+		<converter-class>ro.ig.projectBay.util.DateConverter</converter-class>
+	</converter>
+	
 	<application>
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 		<locale-config>
@@ -14,8 +19,5 @@
 			<base-name>messages</base-name>
 			<var>i18n</var>
 		</resource-bundle>
-
-
 	</application>
-
 </faces-config>

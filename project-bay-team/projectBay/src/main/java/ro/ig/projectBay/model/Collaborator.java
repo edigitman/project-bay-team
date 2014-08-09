@@ -16,7 +16,7 @@ public class Collaborator {
 	private Integer id;
 
 	@Column(length = 255)
-	private String LastName;
+	private String lastName;
 
 	@Column(length = 255)
 	private String firstName;
@@ -49,11 +49,11 @@ public class Collaborator {
 	}
 
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		this.lastName = lastName;
 	}
 
 	public String getFirstName() {

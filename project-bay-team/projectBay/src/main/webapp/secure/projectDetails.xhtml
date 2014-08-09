@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/template/defaultLayout.xhtml">
+
+	<ui:define name="title">Project Bay</ui:define>
+
+	<ui:define name="body">
+
+		<p:accordionPanel id="accordionPanel" widgetVar="accordion">
+			<p:tab title="#{i18n.proposalDetails}">
+				<div align="center">
+					<h:panelGrid columns="6" cellpadding="2" cellspacing="2" border="1">
+						<h:outputText value="#{i18n.projectName}:" />
+						<h:outputText value="#{i18n.clientName}:" />
+						<h:outputText value="#{i18n.decription}:" />
+						<h:outputText value="#{i18n.price}:" />
+						<h:outputText value="#{i18n.startDate}:" />
+						<h:outputText value="#{i18n.endDate}:" />
+
+						<h:outputText value="#{projectService.currentProject.title}" />
+						<h:outputText
+							value="#{projectService.currentProject.client.firstName} #{projectService.currentProject.client.lastName}" />
+						<h:outputText value="#{projectService.currentProject.description}" />
+						<h:outputText value="#{projectService.currentProject.price}" />
+						<h:outputText value="#{projectService.currentProject.startDate}" />
+						<h:outputText value="#{projectService.currentProject.endDate}" />
+					</h:panelGrid>
+				</div>
+			</p:tab>
+			<p:tab title="#{i18n.proposalsResponses}" style="height:900px">
+				<h:form id="reponsesListForm" style="width:95%">
+					<p:dataTable id="reponsesTable" var="reponsesVar" rows="8"
+						paginator="true" value="#{responseOverviewBB.responsesList}"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+						<p:column headerText="#{i18n.company}"
+							filterBy="#{reponsesVar.responseAuthor.employer.name}"
+							sortBy="#{reponsesVar.responseAuthor.employer.name}"
+							style="width:30px">
+							<div align="center">
+								<h:outputText
+									value="#{reponsesVar.responseAuthor.employer.name}"
+									style="width:30px" />
+							</div>
+						</p:column>
+						<p:column headerText="#{i18n.da}"
+							filterBy="#{reponsesVar.responseAuthor.lastName} #{reponsesVar.responseAuthor.firstName}"
+							sortBy="#{reponsesVar.responseAuthor.lastName} #{reponsesVar.responseAuthor.firstName}"
+							style="width:30px">
+							<div align="center">
+								<h:outputText
+									value="#{reponsesVar.responseAuthor.firstName} #{reponsesVar.responseAuthor.lastName}"
+									style="width:30px" />
+							</div>
+						</p:column>
+						<p:column headerText="#{i18n.description}"
+							sortBy="#{reponsesVar.response}" style="width:150px">
+							<h:outputText value="#{reponsesVar.response}" />
+						</p:column>
+
+						<p:column headerText="#{i18n.price}" sortBy="#{reponsesVar.price}"
+							style="width:80px">
+							<h:outputText value="#{reponsesVar.price}" />
+						</p:column>
+
+						<p:column headerText="#{i18n.validated}"
+							sortBy="#{reponsesVar.validated}" style="width:80px">
+							<h:outputText
+								value="#{responseOverviewBB.getValidation(reponsesVar)}" />
+						</p:column>
+						<p:column headerText="#{i18n.denied}"
+							sortBy="#{reponsesVar.denied}" style="width:80px">
+							<h:outputText
+								value="#{responseOverviewBB.getRejection(reponsesVar)}" />
+						</p:column>
+
+						<p:column headerText="#{i18n.recommendation}"
+							sortBy="#{reponsesVar.price}" style="width:80px">
+							<h:graphicImage library="images"
+								name="#{responseOverviewBB.getImageName(reponsesVar)}"
+								height="32px" width="32px"
+								rendered="#{responseOverviewBB.renderRecommendation(reponsesVar)}" />
+						</p:column>
+					</p:dataTable>
+					<br />
+
+				</h:form>
+			</p:tab>
+		</p:accordionPanel>
+	</ui:define>
+</ui:composition>
