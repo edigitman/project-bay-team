@@ -8,17 +8,21 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/WEB-INF/template/defaultLayout.xhtml">
 	<ui:define name="title">Auction House</ui:define>
-	<ui:define name="body">
 
+	<ui:define name="body">
+		<p:outputLabel value="#{i18n.SignUpIntro}" />
 		<h:form id="loginForm">
-			<p:panelGrid>
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:panelGrid style="border: 0px">
 				<!--roleList email password -->
 				<p:row>
 					<p:column>
 						<p:outputLabel value="#{i18n.firstName} *" />
 					</p:column>
 					<p:column>
-						<p:inputText required="true" requiredMessage=""
+						<p:inputText required="true"
+							requiredMessage="#{i18n.validationFirstName}"
 							value="#{newUserMB.newUser.firstName}" />
 					</p:column>
 				</p:row>
@@ -27,7 +31,8 @@
 						<p:outputLabel value="#{i18n.lastName} *" />
 					</p:column>
 					<p:column>
-						<p:inputText required="true" requiredMessage=""
+						<p:inputText required="true"
+							requiredMessage="#{i18n.validationLastName}"
 							value="#{newUserMB.newUser.lastName}" />
 					</p:column>
 				</p:row>
@@ -36,7 +41,8 @@
 						<p:outputLabel value="#{i18n.selectTypeOfUser} *" />
 					</p:column>
 					<p:column>
-						<p:selectOneMenu value="#{newUserMB.userTypeChosen}">
+						<p:selectOneMenu value="#{newUserMB.userTypeChosen}"
+							required="#{i18n.validationUserType}">
 							<f:selectItem itemLabel="None" itemValue="" />
 							<f:selectItems value="#{newUserMB.userTypeChoiceList}"
 								var="UserType" itemLabel="#{UserType}" itemValue="#{UserType}" />
@@ -44,17 +50,25 @@
 					</p:column>
 				</p:row>
 				<p:row>
-					<p:outputLabel value="#{i18n.whatIsCustomer} *" />
-				</p:row>
-				<p:row>
-					<p:outputLabel value="#{i18n.whatIsITRepresentant} *" />
-				</p:row>
-				<p:row>
 					<p:column>
-						<p:outputLabel value="" />
+						<p:outputLabel value="#{i18n.company} *" />
 					</p:column>
 					<p:column>
-						<p:inputText required="true" requiredMessage=""
+						<p:selectOneMenu value="#{newUserMB.selectedCompany}"
+							required="#{i18n.validationCompanySelection}">
+							<f:selectItem itemLabel="None" itemValue="" />
+							<f:selectItems value="#{newUserMB.allCompanies}" var="company"
+								itemLabel="#{company.name}" itemValue="#{company.id}" />
+						</p:selectOneMenu>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="#{i18n.email}" />
+					</p:column>
+					<p:column>
+						<p:inputText required="true"
+							requiredMessage="#{i18n.validationEmail}"
 							value="#{newUserMB.newUser.email}" />
 					</p:column>
 				</p:row>
@@ -63,8 +77,9 @@
 						<p:outputLabel value="#{i18n.insertPass1} *" />
 					</p:column>
 					<p:column>
-						<p:inputText required="true" requiredMessage=""
-							value="#{newUserMB.pass1}" />
+						<p:inputText required="true"
+							requiredMessage="#{i18n.validationPassword}"
+							value="#{newUserMB.pass1}" type="password" />
 					</p:column>
 				</p:row>
 				<p:row>
@@ -72,13 +87,15 @@
 						<p:outputLabel value="#{i18n.insertPass2} *" />
 					</p:column>
 					<p:column>
-						<p:inputText required="true" requiredMessage=""
-							value="#{newUserMB.pass2}" />
+						<p:inputText required="true"
+							requiredMessage="#{i18n.validationPassword2}"
+							value="#{newUserMB.pass2}" type="password" />
 					</p:column>
 				</p:row>
-
-
 			</p:panelGrid>
+			<p:commandButton action="#{newUserMB.save}" value="Save" />
 		</h:form>
+		<p:outputLabel value="#{i18n.whatIsCustomer} *" />
+		<p:outputLabel value="#{i18n.whatIsITRepresentant} *" />
 	</ui:define>
 </ui:composition>

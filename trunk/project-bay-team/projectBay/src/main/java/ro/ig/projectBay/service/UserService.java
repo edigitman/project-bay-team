@@ -21,5 +21,7 @@ public interface UserService extends Serializable {
 	public List<Role> getUserRoleForUser(Integer userId);
 	
 	public List<String> getUserTypeChoiceList();
+	
+	public User saveUser(User user);
 
 }

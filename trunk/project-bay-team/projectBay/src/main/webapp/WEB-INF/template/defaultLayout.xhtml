@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="#{localeMB.language}" xmlns="http://www.w3.org/1999/xhtml">
-<f:view locale="#{localeMB.locale}" xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{localeMB.language}" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" contentType="text/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:view locale="#{localeMB.locale}" contentType="text/html"
 	encoding="UTF-8">
 
 	<!--HEAD-->
@@ -30,11 +30,10 @@
 	<!--BODY-->
 	<h:body>
 
-
 		<!-- TOP NAVIGATION BAR -->
-		<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
+		<div id="nav_bar" class="navbar navbar-inverse navbar-fixed-top">
+			<div id="inner_nav_bar" class="navbar-inner">
+				<div id="container_nav_bar" class="container">
 
 					<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 					<a class="btn btn-navbar" data-toggle="collapse"
@@ -43,7 +42,7 @@
 					</a>
 					<!--/ .btn-navbar -->
 
-					<h:form>
+					<h:form id="form_container_nav_bar">
 						<!-- Brand -->
 						<h:link class="brand" outcome="/default">Auction House
                             <f:param name="cid"
@@ -83,26 +82,29 @@
 						<!--/ Buttons on the left -->
 
 						<!-- Buttons on the right -->
-						<div class="nav-collapse collapse nav pull-right">
+						<div id="logged_in_info"
+							class="nav-collapse collapse nav pull-right">
 
 							<ul class="nav">
 								<!-- sign in -->
-								<li><h:outputLink
-										value="#{request.contextPath}/j_spring_security_logout">
-										<!--  rendered="#{userMB.userLoggedIn}"> -->
-										<h:outputText value="${i18n.logOut}" />
-									</h:outputLink></li>
-								<!-- sign up -->
-								<li><h:outputLink
-										value="#{request.contextPath}/j_spring_security_logout">
-										<h:outputText value="${i18n.logOut}" />
+								<li><h:commandLink rendered="#{!userMB.userLoggedIn}"
+										action="signin" value="#{i18n.logIn}" /></li>
+								<li><h:commandLink action="signup"
+										rendered="#{!userMB.userLoggedIn}" value="#{i18n.signUp}" />
+								</li>
+								<li><h:outputLink rendered="#{userMB.userLoggedIn}"
+										value="#{request.contextPath}/j_spring_security_logout"
+										onclick="document.getElementById('form_container_nav_bar:logOut').click();">
+										<h:outputText value="#{i18n.logOut}" />
 									</h:outputLink></li>
 							</ul>
 							<div class="clock_tab">
-								<p:clock pattern="HH:mm:ss dd/MM/yyyy" />
+								<p:clock pattern="HH:mm dd/MM/yyyy" />
 							</div>
 						</div>
 						<!--/ Buttons on the right -->
+						<p:commandButton id="logOut" style="display: none;"
+							action="#{userMB.logout}" />
 					</h:form>
 				</div>
 			</div>
@@ -127,23 +129,42 @@
 					<ui:insert name="menu">
 						<h:form rendered="#{request.isUserInRole('ROLE_CLIENT')}">
 							<ul>
-								<li><h:commandLink action="currentProjects"
-										value="My Active Projects"
-										rendered="#{request.isUserInRole('ROLE_CLIENT')}" />
-									<ul>
-										<li><h:commandLink action="addProject"
-												value="Add Project"
-												rendered="#{request.isUserInRole('ROLE_CLIENT')}" /></li>
-									</ul></li>
-								<li><h:commandLink action="agencies" value="Agencies" /></li>
-
+							<li><h:commandLink
+										action="#{redirectMB.gotoPastCollaborations()}"
+										value="#{i18n.home}"
+										rendered="#{request.isUserInRole('ROLE_CLIENT')}" /></li>
+								<li><h:commandLink
+										action="#{redirectMB.gotoCurrentProjects()}"
+										value="#{i18n.currentProjects}"
+										rendered="#{request.isUserInRole('ROLE_CLIENT')}" /></li>
+								<li><h:commandLink action="#{redirectMB.gotoNewProject()}"
+										value="#{i18n.addProject}"
+										rendered="#{request.isUserInRole('ROLE_CLIENT')}" /></li>
+								<li><h:commandLink
+										action="#{redirectMB.gotoPastProjects()}"
+										value="#{i18n.pastProjects}"
+										rendered="#{request.isUserInRole('ROLE_CLIENT')}" /></li>
 							</ul>
 						</h:form>
 						<h:form rendered="#{request.isUserInRole('ROLE_DA')}">
 							<ul>
-								<li><h:commandLink action="clearedProjects"
-										value="Projects" rendered="#{request.isUserInRole('ROLE_DA')}" /></li>
-								<!-- TODO: add menu -->
+								<li><h:commandLink
+										action="#{redirectMB.gotoClearedProjects()}"
+										value="#{i18n.clearedProjects}"
+										rendered="#{request.isUserInRole('ROLE_DA')}" /></li>
+								<li><h:commandLink action="#{redirectMB.gotoWonProjects()}"
+										value="#{i18n.wonProjects}"
+										rendered="#{request.isUserInRole('ROLE_DA')}" /></li>
+								<li><h:commandLink
+										action="#{redirectMB.gotoMyCollaborators()}"
+										value="#{i18n.myCollaborators}"
+										rendered="#{request.isUserInRole('ROLE_DA')}" />
+									<ul>
+										<li><h:commandLink
+												action="#{redirectMB.gotoNewCollaborator()}"
+												value="#{i18n.newCollaborator}"
+												rendered="#{request.isUserInRole('ROLE_DA')}" /></li>
+									</ul></li>
 							</ul>
 						</h:form>
 					</ui:insert>
@@ -151,7 +172,7 @@
 
 				<!-- CONTENT -->
 				<div class="span9 well body-page">
-					<ui:insert name="body">Default content</ui:insert>
+					<ui:insert name="body" />
 				</div>
 				<!--/.CONTENT -->
 			</div>
@@ -164,7 +185,7 @@
 					<a href="#">Source code on GitHub</a>
 				</div> -->
 				<div class="span6 text-center">
-					<a class="muted credit" href="#">Gosav Ioana-Iulia</a>
+					<a class="muted credit" href="#">Ioana-Iulia Gosav</a>
 				</div>
 			</div>
 		</div>

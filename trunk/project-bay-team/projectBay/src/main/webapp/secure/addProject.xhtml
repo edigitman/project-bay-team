@@ -49,7 +49,7 @@
 			<p:commandButton action="#{addProjectBB.addProject}"
 				value="#{i18n.save}" />
 			<p:commandButton value="#{i18n.cancel}" immediate="true"
-				action="currentProjects?faces-redirect=true" />
+				action="#{redirectMB.gotoCurrentProjects}" />
 		</h:form>
 	</ui:define>
 </ui:composition>
