@@ -2,6 +2,8 @@ package ro.ig.projectBay.service;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
+
 import ro.ig.projectBay.model.Project;
 import ro.ig.projectBay.model.User;
 
@@ -17,4 +19,5 @@ public interface ProjectService {
 
 	public void addProject(Project project);
 
+	public List<Project> findPastProjects(Integer id);
 }

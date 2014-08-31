@@ -1,9 +1,20 @@
 package ro.ig.projectBay.model;
 
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-//@Entity
+import ro.ig.projectBay.util.PersistenceListener;
+
+
+@Entity
+@EntityListeners(PersistenceListener.class)
 public class UserRole {
-/*
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -38,6 +49,6 @@ public class UserRole {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}*/
+	}
 
 }

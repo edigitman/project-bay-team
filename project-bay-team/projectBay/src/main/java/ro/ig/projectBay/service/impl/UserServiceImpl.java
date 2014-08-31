@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
 
 	@PostConstruct
 	public void init() {
+		currentUser = null;
 		userTypeChoiceList = new ArrayList<String>();
 		userTypeChoiceList.add("Customer User");
 		userTypeChoiceList.add("IT Company Representant User");
@@ -75,6 +76,9 @@ public class UserServiceImpl implements UserService {
 	public void setUserTypeChoiceList(List<String> userTypeChoiceList) {
 		this.userTypeChoiceList = userTypeChoiceList;
 	}
-	
+	@Transactional(readOnly = false)
+	public User saveUser(User user) {
+		return userDAO.saveAndFlush(user);
+	}
 
 }

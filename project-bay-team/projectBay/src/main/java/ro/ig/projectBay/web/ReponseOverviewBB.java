@@ -34,9 +34,11 @@ public class ReponseOverviewBB {
 		responsesList = new ArrayList<Response>();
 		responsesList = responseService.getResponseByProject(projectService
 				.getCurrentProject().getId());
-		calculateBestPrice();
+		if (responsesList != null && responsesList.size() > 0) {
+			calculateBestPrice();
+		}
 	}
-
+///GET BACK TO WORK!
 	public void calculateBestPrice() {
 		List<Double> prices = new ArrayList<Double>();
 		for (Response response : responsesList) {
@@ -45,17 +47,21 @@ public class ReponseOverviewBB {
 		Collections.sort(prices);
 		firstPrice = prices.get(0).doubleValue();
 		int pos2 = 1;
-		for (int i = 1; i < prices.size(); i++) {
-			if (firstPrice > prices.get(i).doubleValue()) {
-				secondPrice = prices.get(i).doubleValue();
-				pos2 = i;
-				break;
+		if (responsesList.size() >= 1) {
+			for (int i = 1; i < prices.size(); i++) {
+				if (firstPrice > prices.get(i).doubleValue()) {
+					secondPrice = prices.get(i).doubleValue();
+					pos2 = i;
+					break;
+				}
 			}
-		}
-		for (int i = pos2 + 1; i < prices.size(); i++) {
-			if (secondPrice > prices.get(i).doubleValue()) {
-				thirdPrice = prices.get(i).doubleValue();
-				break;
+			if (responsesList.size() >= 2) {
+				for (int i = pos2 + 1; i < prices.size(); i++) {
+					if (secondPrice > prices.get(i).doubleValue()) {
+						thirdPrice = prices.get(i).doubleValue();
+						break;
+					}
+				}
 			}
 		}
 	}

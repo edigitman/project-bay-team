@@ -2,13 +2,17 @@ package ro.ig.projectBay.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import ro.ig.projectBay.util.PersistenceListener;
+
 @Entity
+@EntityListeners(PersistenceListener.class)
 public class Collaborator {
 
 	@Id

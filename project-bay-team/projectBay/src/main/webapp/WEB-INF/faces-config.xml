@@ -9,6 +9,10 @@
 		<converter-id>dateConverter</converter-id>
 		<converter-class>ro.ig.projectBay.util.DateConverter</converter-class>
 	</converter>
+	<converter>
+		<converter-id>companyConverter</converter-id>
+		<converter-class>ro.ig.projectBay.util.CompanyConverter</converter-class>
+	</converter>
 	
 	<application>
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>

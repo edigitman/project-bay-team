@@ -3,11 +3,13 @@ package ro.ig.projectBay.web;
 import java.io.IOException;
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -26,6 +28,12 @@ public class UserMB implements Serializable {
 
 	private String username;
 	private String password;
+
+	@PostConstruct
+	public void init() {
+		username = new String();
+		password = new String();
+	}
 
 	public String doLogin() throws ServletException, IOException {
 		// do any job with the associated values that you've got from the user,
@@ -61,7 +69,14 @@ public class UserMB implements Serializable {
 	}
 
 	public boolean isUserLoggedIn() {
-		return false;
+		if (userService.getCurrentUser() == null)
+			return false;
+		else
+			return true;
+	}
+	
+	public void logout(){
+		userService.setCurrentUser(null);
 	}
 
 	public UserService getUserService() {
@@ -71,5 +86,5 @@ public class UserMB implements Serializable {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 }

@@ -62,4 +62,9 @@ public class ProjectServiceImpl implements ProjectService {
 		this.userDAO = userDAO;
 	}
 
+	@Override
+	public List<Project> findPastProjects(Integer id) {
+		return projectDAO.findPastProjects(id);
+	}
+
 }

@@ -1,12 +1,12 @@
 body {
-    padding-top: 50px;
+	padding-top: 50px;
 }
 
 .nav-list {
-    font-size: 25px;
+	font-size: 25px;
 }
 
-.clock_tab{
+.clock_tab {
 	margin-top: 10px;
 	width: 300px;
 }
@@ -15,6 +15,10 @@ body {
 	width: 95% !important;
 }
 
-.body-page{
+.body-page {
 	height: 500px;
+}
+
+.ui-widget-content {
+	border: 0px solid #ffffff;
 }
