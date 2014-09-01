@@ -11,8 +11,148 @@
 	template="/WEB-INF/template/defaultLayout.xhtml">
 
 	<ui:define name="title">Auction House</ui:define>
-
 	<ui:define name="body">
-	
+
+		<h:form id="collaborateursListForm" style="width:95%">
+
+			<p:dataTable id="listCollaborateurs" var="collaborateurs"
+				value="#{collaboratorsOverviewBB.collaborateursCollection}"
+				filteredValue="#{collaboratorsOverviewBB.filteredcollaborateurs}"
+				editable="true" rows="15" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+				<f:facet name="header">#{languageVar['listOfCollaborators']}</f:facet>
+				<p:ajax event="rowEdit" listener="#{collaboratorsOverviewBB.onEdit}" />
+				<p:ajax event="rowEditCancel"
+					listener="#{collaboratorsOverviewBB.onCancel}" />
+
+				<p:column headerText="#{languageVar['cod']}"
+					sortBy="#{collaborateurs.cod}" style="width:30px">
+					<div align="center">
+						<h:outputText value="#{collaborateurs.cod}" />
+					</div>
+				</p:column>
+				<p:column headerText="#{languageVar['agency']}" style="width:30px"
+					sortBy="#{collaborateurs.agence_collaborateur}"
+					filterBy="#{collaborateurs.agence_collaborateur}">
+					<div align="center">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{collaborateurs.agence_collaborateur}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{collaborateurs.agence_collaborateur}"
+									style="width:30px" />
+							</f:facet>
+						</p:cellEditor>
+					</div>
+				</p:column>
+				<p:column headerText="#{languageVar['lastName']}"
+					sortBy="#{collaborateurs.nom}" style="width:150px">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{collaborateurs.nom}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{collaborateurs.nom}" style="width:150px" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="#{languageVar['firstName']}"
+					sortBy="#{collaborateurs.preNom}" style="width:150px">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{collaborateurs.preNom}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{collaborateurs.preNom}" style="width:150px" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="#{languageVar['jobTitle']}"
+					filterBy="#{collaborateurs.fonction}"
+					sortBy="#{collaborateurs.fonction}" style="width:150px">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{collaborateurs.fonction}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu value="#{collaborateurs.fonction}"
+								style="width:150px">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItem itemLabel="T - Tester" itemValue="Tester" />
+								<f:selectItem itemLabel="DEV - Developer" itemValue="Developer" />
+								<f:selectItem itemLabel="PM - Project manager"
+									itemValue="Project manager" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="#{languageVar['technology']}"
+					sortBy="#{collaborateurs.technologies}" style="width:50px">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{collaborateurs.technologies}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{collaborateurs.technologies}"
+								style="width:50px" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="#{languageVar['salary']}"
+					sortBy="#{collaborateurs.masse_salariale}" style="width:100px">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{collaborateurs.masse_salariale}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{collaborateurs.masse_salariale}"
+								style="width:100px" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{languageVar['edit']}" style="width:8px"
+					rendered="#{collaboratorsOverviewBB.isAdmin()}">
+					<p:rowEditor icon="ui-icon-pencil" />
+				</p:column>
+
+				<p:column headerText="#{languageVar['downloadCV']}"
+					style="width:150px">
+					<div align="center">
+						<p:commandLink id="downloadLink" value="Download" ajax="false"
+							disabled="#{collaboratorsOverviewBB.renderDownloadLink(collaborateurs)}">
+							<p:fileDownload
+								value="#{collaboratorsOverviewBB.fileDownload(collaborateurs)}" />
+						</p:commandLink>
+					</div>
+				</p:column>
+
+				<p:column headerText="#{languageVar['delete']}" style="width:8px"
+					rendered="#{collaboratorsOverviewBB.isAdmin()}">
+					<div align="center">
+						<p:commandButton icon="ui-icon-trash"
+							onclick="confirmDeleteCol.show();"
+							update=":collaborateursListForm:listCollaborateurs">
+							<f:setPropertyActionListener
+								target="#{collaboratorsOverviewBB.selectedToDeleteCollaborateur}"
+								value="#{collaborateurs}" />
+						</p:commandButton>
+					</div>
+				</p:column>
+			</p:dataTable>
+			<p:confirmDialog id="confirmDeleteCol" widgetVar="confirmDeleteCol"
+				message="#{languageVar['confirmDelete']} #{collaborateurs.nom}">
+				<p:commandButton value="#{languageVar['yes']}"
+					action="#{collaboratorsOverviewBB.deleteCollaborateur}"
+					update="collaborateursListForm:listCollaborateurs"
+					oncomplete="confirmDeleteCol.hide();" />
+				<p:commandButton value="#{languageVar['no']}"
+					onclick="confirmDeleteCol.hide();" />
+			</p:confirmDialog>
+		</h:form>
+
+
 	</ui:define>
 </ui:composition>
