@@ -55,15 +55,15 @@ public class NewUserMB implements Serializable {
 
 	public String save() {
 		List<Role> roleList = new ArrayList<>();
-		roleList.add(roleService.save(roleService.findByCode("USER")));
-		roleList.add(roleService.save(roleService.findByCode(userTypeChosen)));
+		roleList.add(roleService.findByCode("USER"));
+		roleList.add(roleService.findByCode(userTypeChosen));
 
 		newUser.setPassword(pass1);
 		newUser.setLogin(newUser.getEmail());
-		newUser.setEmployer(companyService.save(companyService.findById(selectedCompany)));
+		newUser.setEmployer(companyService.findById(selectedCompany));
 		newUser.setRoleList(roleList);
 		newUser = userService.saveUser(newUser);
-		return null;
+		return "default?faces-redirect=true";
 	}
 
 	public UserService getUserService() {
