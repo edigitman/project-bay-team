@@ -4,8 +4,8 @@ import ro.ig.projectBay.model.Role;
 
 public interface RoleService {
 
-	public Role findByCode(String code);
+	Role findByCode(String code);
 	
-	public Role save(Role role);
+	Role save(Role role);
 
 }

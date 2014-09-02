@@ -12,16 +12,16 @@ public interface UserService extends Serializable {
 
 	User findByEmail(String inputUsername);
 
-	public User getCurrentUser();
+	User getCurrentUser();
 
-	public void setCurrentUser(User currentUser);
+	void setCurrentUser(User currentUser);
 
-	public User findByLogin(String login);
+	User findByLogin(String login);
 
-	public List<Role> getUserRoleForUser(Integer userId);
+	List<Role> getUserRoleForUser(Integer userId);
 	
-	public List<String> getUserTypeChoiceList();
+	List<String> getUserTypeChoiceList();
 	
-	public User saveUser(User user);
+	User saveUser(User user);
 
 }
