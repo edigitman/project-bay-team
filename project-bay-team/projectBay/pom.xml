@@ -28,7 +28,6 @@
 		<hibernate.manager.version>4.1.1.Final</hibernate.manager.version>
 		<hibernate.validator.version>4.1.0.Final</hibernate.validator.version>
 		<mysql.driver.version>5.1.23</mysql.driver.version>
-		<slf4j.version>1.7.5</slf4j.version>
 		<junit.version>4.11</junit.version>
 		<org.slf4j.version>1.7.7</org.slf4j.version>
 	</properties>
@@ -209,6 +208,7 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${org.slf4j.version}</version>
 		</dependency>
+		
 
 		<!-- JUNIT -->
 		<dependency>
