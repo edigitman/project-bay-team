@@ -1,5 +1,7 @@
 package ro.ig.projectBay.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,11 +18,13 @@ public class CustomDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UserService userService;
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(CustomDetailsService.class);
+	
 	@Override
 	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String username)
-			throws UsernameNotFoundException, DataAccessException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
+		
 		User user = null;
 		CustomUserDetails userDetails = null;
 
@@ -32,8 +36,7 @@ public class CustomDetailsService implements UserDetailsService {
 			userDetails = new CustomUserDetails(user);
 
 		} catch (Exception e) {
-			// TODO: logger
-			System.out.println(e.getStackTrace());
+			logger.debug(e.getMessage(), e);
 		}
 
 		return userDetails;

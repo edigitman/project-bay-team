@@ -14,6 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ro.ig.projectBay.service.UserService;
 
 @ManagedBean(name = "userMB")
@@ -21,7 +24,9 @@ import ro.ig.projectBay.service.UserService;
 public class UserMB implements Serializable {
 
 	private static final long serialVersionUID = -3990573210489057318L;
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(UserMB.class);
+	
 	@ManagedProperty(value = "#{userService}")
 	private UserService userService;
 
@@ -68,10 +73,9 @@ public class UserMB implements Serializable {
 	}
 
 	public boolean isUserLoggedIn() {
-		if (userService.getCurrentUser() == null)
-			return false;
-		else
-			return true;
+		boolean userLogged = userService.getCurrentUser() != null;
+		logger.debug("Is user logedIn returned [{}]", userLogged);
+		return userLogged;
 	}
 	
 	public void logout(){
