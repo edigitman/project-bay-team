@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -29,14 +29,13 @@ public class CustomUserDetails implements UserDetails {
 		this.user = user;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public Collection<GrantedAuthority> getAuthorities() {
 
 		Collection<GrantedAuthority> auth = new ArrayList<>();
 		
 	for (Role userRole : user.getRoleList()) {
-			auth.add(new GrantedAuthorityImpl("ROLE_" + userRole.getCode()));
+			auth.add(new SimpleGrantedAuthority("ROLE_" + userRole.getCode()));
 		}
 
 		return auth;
