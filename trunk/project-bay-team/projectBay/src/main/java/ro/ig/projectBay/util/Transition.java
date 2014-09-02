@@ -19,8 +19,4 @@ public class Transition {
 	public static final String PREFIX = "secure/";
 	public static final String SUFFIX = "";
 
-	private static String getTransition(String prefix, String transition,
-			String suffix) {
-		return transition;
-	}
 }
