@@ -20,7 +20,6 @@ public class CompanyConverter implements Converter {
 	@Autowired
 	CompanyDAO companyDAO;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {

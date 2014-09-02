@@ -1,8 +1,5 @@
 package ro.ig.projectBay.web;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
