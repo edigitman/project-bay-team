@@ -24,9 +24,9 @@ import ro.ig.projectBay.service.UserService;
 public class UserMB implements Serializable {
 
 	private static final long serialVersionUID = -3990573210489057318L;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(UserMB.class);
-	
+
 	@ManagedProperty(value = "#{userService}")
 	private UserService userService;
 
@@ -77,8 +77,8 @@ public class UserMB implements Serializable {
 		logger.debug("Is user logedIn returned [{}]", userLogged);
 		return userLogged;
 	}
-	
-	public void logout(){
+
+	public void logout() {
 		userService.setCurrentUser(null);
 	}
 

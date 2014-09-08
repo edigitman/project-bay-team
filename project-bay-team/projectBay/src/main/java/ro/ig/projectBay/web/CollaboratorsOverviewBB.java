@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -27,11 +28,14 @@ public class CollaboratorsOverviewBB {
 	@ManagedProperty(value = "#{userService}")
 	private UserService userService;
 
+	private Collaborator selectedToDeleteCollaborator;
 	public List<Collaborator> collaborators;
 	private StreamedContent file;
+	private byte[] cv;
 
 	public void init() {
 		collaborators = new ArrayList<Collaborator>();
+		selectedToDeleteCollaborator = new Collaborator();
 		collaborators = collaboratorService
 				.getCollaboratorsByCompanyId(userService.getCurrentUser()
 						.getEmployer().getId());
@@ -52,14 +56,21 @@ public class CollaboratorsOverviewBB {
 		}
 		return null;
 	}
-	
-	public void onEdit(RowEditEvent event) {
-		Collaborator collaborateursToUpdate = (Collaborator) event
-				.getObject();
-		//TODO
-		//collaboratorService.editCollaborateur(collaborateursToUpdate);
+
+	public void fileUpload(FileUploadEvent event) {
+		cv = event.getFile().getContents();
 	}
 
+	public void onEdit(RowEditEvent event) {
+		Collaborator collaborateursToUpdate = (Collaborator) event.getObject();
+		collaboratorService.save(collaborateursToUpdate);
+	}
+
+	public void onCancel(RowEditEvent event) {
+		event.getObject();
+	}
+
+	// ---------------------------------------------------------
 	public CollaboratorService getCollaboratorService() {
 		return collaboratorService;
 	}
@@ -82,6 +93,31 @@ public class CollaboratorsOverviewBB {
 
 	public void setCollaborators(List<Collaborator> collaborators) {
 		this.collaborators = collaborators;
+	}
+
+	public Collaborator getSelectedToDeleteCollaborator() {
+		return selectedToDeleteCollaborator;
+	}
+
+	public void setSelectedToDeleteCollaborator(
+			Collaborator selectedToDeleteCollaborator) {
+		this.selectedToDeleteCollaborator = selectedToDeleteCollaborator;
+	}
+
+	public StreamedContent getFile() {
+		return file;
+	}
+
+	public void setFile(StreamedContent file) {
+		this.file = file;
+	}
+
+	public byte[] getCv() {
+		return cv;
+	}
+
+	public void setCv(byte[] cv) {
+		this.cv = cv;
 	}
 
 }

@@ -79,6 +79,7 @@
 									</ul></li>
 							</ul>
 						</div>
+
 						<!--/ Buttons on the left -->
 
 						<!-- Buttons on the right -->
@@ -99,7 +100,7 @@
 									</h:outputLink></li>
 							</ul>
 							<div class="clock_tab">
-								<p:clock pattern="HH:mm dd/MM/yyyy" />
+								<p:clock pattern="dd/MM/yyyy" />
 							</div>
 						</div>
 						<!--/ Buttons on the right -->
@@ -129,43 +130,44 @@
 					<ui:insert name="menu">
 						<h:form rendered="#{request.isUserInRole('ROLE_CLIENT')}">
 							<ul>
-							<li><h:commandLink
-										action="#{redirectMB.gotoPastCollaborations()}"
+								<li><h:commandLink action="home?faces-redirect=true"
 										value="#{i18n.home}"
 										rendered="#{request.isUserInRole('ROLE_CLIENT')}" /></li>
 								<li><h:commandLink
-										action="#{redirectMB.gotoCurrentProjects()}"
+										action="currentProjects?faces-redirect=true"
 										value="#{i18n.currentProjects}"
 										rendered="#{request.isUserInRole('ROLE_CLIENT')}" /></li>
-								<li><h:commandLink action="#{redirectMB.gotoNewProject()}"
+								<li><h:commandLink action="addProject?faces-redirect=true"
 										value="#{i18n.addProject}"
 										rendered="#{request.isUserInRole('ROLE_CLIENT')}" /></li>
 								<li><h:commandLink
-										action="#{redirectMB.gotoPastProjects()}"
+										action="pastProjects?faces-redirect=true"
 										value="#{i18n.pastProjects}"
 										rendered="#{request.isUserInRole('ROLE_CLIENT')}" /></li>
 							</ul>
+
 						</h:form>
 						<h:form rendered="#{request.isUserInRole('ROLE_DA')}">
 							<ul>
 								<li><h:commandLink
-										action="#{redirectMB.gotoClearedProjects()}"
+										action="clearedProjects?faces-redirect=true"
 										value="#{i18n.clearedProjects}"
 										rendered="#{request.isUserInRole('ROLE_DA')}" /></li>
-								<li><h:commandLink action="#{redirectMB.gotoWonProjects()}"
+								<li><h:commandLink action="wonProjects?faces-redirect=true"
 										value="#{i18n.wonProjects}"
 										rendered="#{request.isUserInRole('ROLE_DA')}" /></li>
 								<li><h:commandLink
-										action="#{redirectMB.gotoMyCollaborators()}"
+										action="myCollaborators?faces-redirect=true"
 										value="#{i18n.myCollaborators}"
 										rendered="#{request.isUserInRole('ROLE_DA')}" />
 									<ul>
 										<li><h:commandLink
-												action="#{redirectMB.gotoNewCollaborator()}"
+												action="newCollaborator?faces-redirect=true80-"
 												value="#{i18n.newCollaborator}"
 												rendered="#{request.isUserInRole('ROLE_DA')}" /></li>
 									</ul></li>
 							</ul>
+
 						</h:form>
 					</ui:insert>
 				</div>

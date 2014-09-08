@@ -10,7 +10,8 @@
 		<intercept-url pattern="/**" access="permitAll()" />
 
 		<!-- Custom login page -->
-		<form-login login-page="/signin.jsf" />
+		<form-login login-page="/signin.jsf" default-target-url="/secure/home.xhtml"
+            always-use-default-target="true"    />
 
 		<!-- Custom logout page -->
 		<logout />

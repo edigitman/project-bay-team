@@ -16,68 +16,56 @@
 		<h:form id="collaborateursListForm" style="width:95%">
 
 			<p:dataTable id="listCollaborateurs" var="collaborateurs"
-				value="#{collaboratorsOverviewBB.collaborateursCollection}"
-				filteredValue="#{collaboratorsOverviewBB.filteredcollaborateurs}"
-				editable="true" rows="15" paginator="true"
+				value="#{collaboratorsOverviewBB.collaborators}" editable="true"
+				rows="15" paginator="true"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 
-				<f:facet name="header">#{languageVar['listOfCollaborators']}</f:facet>
+				<f:facet name="header">#{i18n.listOfCollaborators}</f:facet>
 				<p:ajax event="rowEdit" listener="#{collaboratorsOverviewBB.onEdit}" />
 				<p:ajax event="rowEditCancel"
 					listener="#{collaboratorsOverviewBB.onCancel}" />
 
-				<p:column headerText="#{languageVar['cod']}"
-					sortBy="#{collaborateurs.cod}" style="width:30px">
+
+				<p:column headerText="#{i18n.company}"
+					sortBy="#{collaborateurs.company.name}"
+					filterBy="#{collaborateurs.company.name}">
 					<div align="center">
-						<h:outputText value="#{collaborateurs.cod}" />
+						<h:outputText value="#{collaborateurs.company.name}" />
 					</div>
 				</p:column>
-				<p:column headerText="#{languageVar['agency']}" style="width:30px"
-					sortBy="#{collaborateurs.agence_collaborateur}"
-					filterBy="#{collaborateurs.agence_collaborateur}">
-					<div align="center">
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="#{collaborateurs.agence_collaborateur}" />
-							</f:facet>
-							<f:facet name="input">
-								<p:inputText value="#{collaborateurs.agence_collaborateur}"
-									style="width:30px" />
-							</f:facet>
-						</p:cellEditor>
-					</div>
-				</p:column>
-				<p:column headerText="#{languageVar['lastName']}"
-					sortBy="#{collaborateurs.nom}" style="width:150px">
+				<p:column headerText="#{i18n.lastName}"
+					sortBy="#{collaborateurs.nom}">
 					<p:cellEditor>
 						<f:facet name="output">
-							<h:outputText value="#{collaborateurs.nom}" />
+							<h:outputText value="#{collaborateurs.lastName}" />
 						</f:facet>
 						<f:facet name="input">
-							<p:inputText value="#{collaborateurs.nom}" style="width:150px" />
+							<p:inputText value="#{collaborateurs.lastName}"
+								style="width:150px" />
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
-				<p:column headerText="#{languageVar['firstName']}"
-					sortBy="#{collaborateurs.preNom}" style="width:150px">
+				<p:column headerText="#{i18n.firstName}"
+					sortBy="#{collaborateurs.preNom}">
 					<p:cellEditor>
 						<f:facet name="output">
-							<h:outputText value="#{collaborateurs.preNom}" />
+							<h:outputText value="#{collaborateurs.firstName}" />
 						</f:facet>
 						<f:facet name="input">
-							<p:inputText value="#{collaborateurs.preNom}" style="width:150px" />
+							<p:inputText value="#{collaborateurs.firstName}"
+								style="width:150px" />
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
-				<p:column headerText="#{languageVar['jobTitle']}"
+				<p:column headerText="#{i18n.jobTitle}"
 					filterBy="#{collaborateurs.fonction}"
-					sortBy="#{collaborateurs.fonction}" style="width:150px">
+					sortBy="#{collaborateurs.fonction}">
 					<p:cellEditor>
 						<f:facet name="output">
-							<h:outputText value="#{collaborateurs.fonction}" />
+							<h:outputText value="#{collaborateurs.position}" />
 						</f:facet>
 						<f:facet name="input">
-							<p:selectOneMenu value="#{collaborateurs.fonction}"
+							<p:selectOneMenu value="#{collaborateurs.position}"
 								style="width:150px">
 								<f:selectItem itemLabel="Select One" itemValue="" />
 								<f:selectItem itemLabel="T - Tester" itemValue="Tester" />
@@ -88,38 +76,35 @@
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
-				<p:column headerText="#{languageVar['technology']}"
-					sortBy="#{collaborateurs.technologies}" style="width:50px">
+				<p:column headerText="#{i18n.technology}"
+					sortBy="#{collaborateurs.technology}">
 					<p:cellEditor>
 						<f:facet name="output">
-							<h:outputText value="#{collaborateurs.technologies}" />
+							<h:outputText value="#{collaborateurs.technology}" />
 						</f:facet>
 						<f:facet name="input">
-							<p:inputText value="#{collaborateurs.technologies}"
+							<p:inputText value="#{collaborateurs.technology}"
 								style="width:50px" />
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
-				<p:column headerText="#{languageVar['salary']}"
-					sortBy="#{collaborateurs.masse_salariale}" style="width:100px">
+				<p:column headerText="#{i18n.salary}"
+					sortBy="#{collaborateurs.salary}" style="width:100px">
 					<p:cellEditor>
 						<f:facet name="output">
-							<h:outputText value="#{collaborateurs.masse_salariale}" />
+							<h:outputText value="#{collaborateurs.salary}" />
 						</f:facet>
 						<f:facet name="input">
-							<p:inputText value="#{collaborateurs.masse_salariale}"
-								style="width:100px" />
+							<p:inputText value="#{collaborateurs.salary}" style="width:100px" />
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
 
-				<p:column headerText="#{languageVar['edit']}" style="width:8px"
-					rendered="#{collaboratorsOverviewBB.isAdmin()}">
+				<p:column headerText="#{i18n.edit}" style="width:8px">
 					<p:rowEditor icon="ui-icon-pencil" />
 				</p:column>
 
-				<p:column headerText="#{languageVar['downloadCV']}"
-					style="width:150px">
+				<p:column headerText="#{i18n.downloadCV}" style="width:150px">
 					<div align="center">
 						<p:commandLink id="downloadLink" value="Download" ajax="false"
 							disabled="#{collaboratorsOverviewBB.renderDownloadLink(collaborateurs)}">
@@ -129,26 +114,25 @@
 					</div>
 				</p:column>
 
-				<p:column headerText="#{languageVar['delete']}" style="width:8px"
-					rendered="#{collaboratorsOverviewBB.isAdmin()}">
+				<p:column headerText="#{i18n.delete}" style="width:8px">
 					<div align="center">
 						<p:commandButton icon="ui-icon-trash"
 							onclick="confirmDeleteCol.show();"
 							update=":collaborateursListForm:listCollaborateurs">
 							<f:setPropertyActionListener
-								target="#{collaboratorsOverviewBB.selectedToDeleteCollaborateur}"
+								target="#{collaboratorsOverviewBB.selectedToDeleteCollaborator}"
 								value="#{collaborateurs}" />
 						</p:commandButton>
 					</div>
 				</p:column>
 			</p:dataTable>
 			<p:confirmDialog id="confirmDeleteCol" widgetVar="confirmDeleteCol"
-				message="#{languageVar['confirmDelete']} #{collaborateurs.nom}">
-				<p:commandButton value="#{languageVar['yes']}"
+				message="#{i18n.confirmDelete} #{collaborateurs.nom}">
+				<p:commandButton value="#{i18n.yes}"
 					action="#{collaboratorsOverviewBB.deleteCollaborateur}"
 					update="collaborateursListForm:listCollaborateurs"
 					oncomplete="confirmDeleteCol.hide();" />
-				<p:commandButton value="#{languageVar['no']}"
+				<p:commandButton value="#{i18n.no}"
 					onclick="confirmDeleteCol.hide();" />
 			</p:confirmDialog>
 		</h:form>
