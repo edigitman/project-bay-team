@@ -30,13 +30,35 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public List<Project> getProjectsByUserCleared(Integer userId) {
-		return userDAO.getProjectsByUserCleared(userId);
+		return projectDAO.getProjectsByUserCleared(userId);
 	}
 
 	@Override
 	public void addProject(Project project) {
 		projectDAO.saveAndFlush(project);
 	}
+
+	@Override
+	public List<Project> findPastProjects(Integer id) {
+		return projectDAO.findPastProjects(id);
+	}
+
+	@Override
+	public List<Project> getWonProjects(Integer id) {
+		return projectDAO.getWonProjects(id);
+	}
+
+	public Integer getActiveProjects() {
+		int active = 1;
+		return projectDAO.getNumberOfProjectsByValidity(active);
+	}
+
+	public Integer getClosedProjects() {
+		int inactive = 0;
+		return projectDAO.getNumberOfProjectsByValidity(inactive);
+	}
+
+	// --------------------- GETTERS AND SETTERS ---------------------
 
 	public ProjectDAO getProjectDAO() {
 		return projectDAO;
@@ -60,11 +82,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 	public void setUserDAO(UserDAO userDAO) {
 		this.userDAO = userDAO;
-	}
-
-	@Override
-	public List<Project> findPastProjects(Integer id) {
-		return projectDAO.findPastProjects(id);
 	}
 
 }

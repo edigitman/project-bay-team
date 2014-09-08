@@ -18,4 +18,10 @@ public interface ProjectService {
 	void addProject(Project project);
 
 	List<Project> findPastProjects(Integer id);
+
+	List<Project> getWonProjects(Integer id);
+
+	Integer getActiveProjects();
+
+	Integer getClosedProjects();
 }

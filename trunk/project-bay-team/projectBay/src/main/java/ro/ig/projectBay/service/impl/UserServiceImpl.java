@@ -1,7 +1,9 @@
 package ro.ig.projectBay.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
@@ -22,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
 	private User currentUser;
 	private List<String> userTypeChoiceList;
+	private Map<String, String> userTypeMap;
 
 	@Autowired
 	private UserDAO userDAO;
@@ -32,6 +35,9 @@ public class UserServiceImpl implements UserService {
 		userTypeChoiceList = new ArrayList<String>();
 		userTypeChoiceList.add("Customer User");
 		userTypeChoiceList.add("IT Company Representant User");
+		userTypeMap = new HashMap<String, String>();
+		userTypeMap.put("Customer User", "CLIENT");
+		userTypeMap.put("IT Company Representant User", "DA");
 	}
 
 	@Override
@@ -69,16 +75,27 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	@Transactional(readOnly = false)
+	public User saveUser(User user) {
+		return userDAO.saveAndFlush(user);
+	}
+
 	public List<String> getUserTypeChoiceList() {
 		return userTypeChoiceList;
 	}
 
-	public void setUserTypeChoiceList(List<String> userTypeChoiceList) {
-		this.userTypeChoiceList = userTypeChoiceList;
+	public Map<String, String> getUserTypeMap() {
+		return userTypeMap;
 	}
-	@Transactional(readOnly = false)
-	public User saveUser(User user) {
-		return userDAO.saveAndFlush(user);
+
+	@Override
+	public List<User> getNumberOfClients() {
+		return userDAO.getNumberOfUsersWithRole("CLIENT");
+	}
+
+	@Override
+	public List<User> getNumberOfDAs() {
+		return userDAO.getNumberOfUsersWithRole("DA");
 	}
 
 }

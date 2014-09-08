@@ -7,11 +7,29 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/WEB-INF/template/defaultLayout.xhtml">
-	
-	<ui:define name="title">Project Bay</ui:define>
-	
+	<ui:define name="title">Auction House</ui:define>
 	<ui:define name="body">
-	
-	</ui:define>
 
+		<h:outputText value="#{i18n.welcome}" />
+		<br />
+		<h:outputText value="#{i18n.welcomeInfo1}" />
+		<br />
+		<h:outputText value="#{i18n.welcomeInfo2}" />
+		<br />
+		<ul>
+			<li><h:outputText
+					value="#{homeBB.numberOfDAs} #{i18n.numberOfDAs}" /></li>
+			<li><h:outputText
+					value="#{homeBB.numberOfClients} #{i18n.numberOfClients}" /></li>
+			<li><h:outputText
+					value="#{homeBB.numberOfActiveProjects} #{i18n.numberOfActiveProjects}" /></li>
+			<li><h:outputText
+					value="#{homeBB.numberOfClosedProjects} #{i18n.numberOfClosedProjects}" /></li>
+		</ul>
+		<h:outputText value="#{i18n.welcomeInfo3}" />
+		<br />
+		<h:outputText value="" />
+
+
+	</ui:define>
 </ui:composition>

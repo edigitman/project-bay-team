@@ -13,6 +13,32 @@
 	<ui:define name="title">Auction House</ui:define>
 
 	<ui:define name="body">
-	
+		<h:form id="proposalOverviewClientForm" style="width:95%">
+
+			<p:dataTable id="projectList" var="prop" rowIndexVar="rowindex"
+				value="#{projectsWonBB.projectsCleared}" editable="true">
+
+				<f:facet name="header">#{i18n.projectsOverview}</f:facet>
+
+				<p:column headerText="#{i18n.projectName}" filterBy="#{prop.title}"
+					filterMatchMode="contains" sortBy="#{prop.title}">
+					<h:outputText value="#{prop.title}" />
+				</p:column>
+
+				<p:column headerText="#{i18n.startDate}" sortBy="#{prop.startDate}">
+					<h:outputText value="#{prop.startDate}" />
+				</p:column>
+				<p:column headerText="#{i18n.endDate}" sortBy="#{prop.endDate}">
+					<h:outputText value="#{prop.endDate}" />
+				</p:column>
+				<p:column headerText="#{i18n.price}" sortBy="#{prop.price}">
+					<h:outputText value="#{prop.price}" />
+				</p:column>
+				<p:column headerText="#{i18n.details}">
+					<p:commandButton value="#{i18n.details}"
+						action="#{projectsWonBB.toProjectDetails(prop)}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
 	</ui:define>
 </ui:composition>

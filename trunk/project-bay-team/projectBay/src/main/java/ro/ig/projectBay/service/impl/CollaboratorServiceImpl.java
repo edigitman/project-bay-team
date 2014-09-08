@@ -21,4 +21,9 @@ public class CollaboratorServiceImpl implements CollaboratorService {
 	public List<Collaborator> getCollaboratorsByCompanyId(Integer id) {
 		return collaboratorDAO.getCollaboratorsByCompanyId(id);
 	}
+	
+	@Override
+	public Collaborator save(Collaborator collaborator){
+		return collaboratorDAO.saveAndFlush(collaborator);
+	}
 }

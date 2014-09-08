@@ -56,7 +56,8 @@ public class NewUserMB implements Serializable {
 	public String save() {
 		List<Role> roleList = new ArrayList<>();
 		roleList.add(roleService.findByCode("USER"));
-		roleList.add(roleService.findByCode(userTypeChosen));
+		roleList.add(roleService.findByCode(userService.getUserTypeMap().get(
+				userTypeChosen)));
 
 		newUser.setPassword(pass1);
 		newUser.setLogin(newUser.getEmail());
