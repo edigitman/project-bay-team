@@ -20,7 +20,7 @@
 		<version.openejb.javaee-api>6.0</version.openejb.javaee-api>
 		<version.arquillian>1.0.2.Final</version.arquillian>
 		<javax.cdi.version>1.1</javax.cdi.version>
-		<primefaces.version>4.0</primefaces.version>
+		<primefaces.version>5.0</primefaces.version>
 		<primefaces.themes.version>1.0.8</primefaces.themes.version>
 		<primefaces.ext.version>1.0.0</primefaces.ext.version>
 		<webjars.bootstrap.version>2.3.2</webjars.bootstrap.version>

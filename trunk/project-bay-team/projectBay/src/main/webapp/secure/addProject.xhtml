@@ -10,14 +10,13 @@
 	xmlns:pe="http://primefaces.org/ui/extensions"
 	template="/WEB-INF/template/defaultLayout.xhtml">
 
-	<ui:define name="title">Auction House</ui:define>
-
 	<ui:define name="body">
 
 		<h:form id="addProposal" enctype="multipart/form-data">
-			<p:messages id="messagesAddPropositions" autoUpdate="true"
-				closable="true" />
-			<p:panelGrid id="AddProposalPanel" columns="2">
+		
+			<p:messages id="messagesAddPropositions" autoUpdate="true" closable="true" />
+		
+			<p:panelGrid id="AddProposalPanel" columns="2" columnClasses="allignedColumn">
 
 				<h:outputLabel for="projectTitle" value="#{i18n.projectName}:" />
 				<p:inputText maxlength="255" id="projectTitle"
@@ -44,13 +43,35 @@
 				<p:fileUpload id="upload"
 					fileUploadListener="#{addProjectBB.fileUpload}" mode="advanced"
 					auto="true" label="UPLOAD" />
-
+				
+				<p:outputLabel for="daSelection" value="DA:" />
+				<p:panelGrid id="daSelection" columns="1">
+				
+					<p:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+				        <h:outputText value="Toti DA: " />
+				        <p:selectBooleanCheckbox value="#{addProjectBB.projectPublic}">
+				        	<p:ajax update="daSelection" />
+				        </p:selectBooleanCheckbox>				       
+			    	</p:panelGrid>
+					
+					<p:selectManyMenu id="advanced" value="#{addProjectBB.selectedUsers}" converter="#{userConverter}"
+	                          var="user" filter="true" filterMatchMode="contains" showCheckbox="true" rendered="#{not addProjectBB.projectPublic}">
+	            
+		 	           	<f:selectItems value="#{addProjectBB.DAUsers}" var="users" itemLabel="#{users.firstName}" itemValue="#{users}" />
+		 	            <p:column>
+			                <p:outputLabel value="#{user.firstName}" />
+			            </p:column>
+	       		 	</p:selectManyMenu>
+	       		 	
+				</p:panelGrid>
+		       
 			</p:panelGrid>
 
-			<p:commandButton action="#{addProjectBB.addProject}"
-				value="#{i18n.save}" />
-			<p:commandButton value="#{i18n.cancel}" immediate="true"
-				action="#{redirectMB.gotoCurrentProjects}" />
+			<p:commandButton action="#{addProjectBB.addProject}" value="#{i18n.save}" />
+			
+			<p:commandButton action="#{redirectMB.gotoCurrentProjects}" value="#{i18n.cancel}" immediate="true" />
+			
 		</h:form>
+		
 	</ui:define>
 </ui:composition>
