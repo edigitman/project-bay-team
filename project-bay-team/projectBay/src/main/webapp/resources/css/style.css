@@ -23,3 +23,7 @@ body {
 .ui-widget-content {
 	border: 0px solid #ffffff;
 }
+
+.allignedColumn{
+	vertical-align: top;
+}

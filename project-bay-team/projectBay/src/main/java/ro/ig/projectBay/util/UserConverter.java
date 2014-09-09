@@ -1,20 +1,21 @@
 package ro.ig.projectBay.util;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
 
 import ro.ig.projectBay.model.User;
 import ro.ig.projectBay.service.UserService;
 
-@FacesConverter(forClass = User.class, value = "userConverter")
+//@FacesConverter(forClass = User.class, value = "userConverter")
+@ManagedBean(name = "userConverter")
 public class UserConverter implements Converter {
-	
+
 	@ManagedProperty(value = "#{userService}")
 	private UserService userService;
-	
+
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
 		
@@ -29,6 +30,14 @@ public class UserConverter implements Converter {
 			return u.getLogin();
 		}
 		return null;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 }

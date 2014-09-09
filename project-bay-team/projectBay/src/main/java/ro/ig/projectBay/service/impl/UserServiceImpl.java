@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +16,7 @@ import ro.ig.projectBay.model.Role;
 import ro.ig.projectBay.model.User;
 import ro.ig.projectBay.service.UserService;
 
-@Service(value = "userService")
+@Service("userService")
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	private List<String> userTypeChoiceList;
 	private Map<String, String> userTypeMap;
 
-	@Autowired
+	@Inject
 	private UserDAO userDAO;
 
 	@PostConstruct
