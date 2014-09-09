@@ -28,11 +28,12 @@
 					value="#{addProjectBB.newProject.description}" autoResize="false" />
 
 				<h:outputText value="#{i18n.startDate}:" />
-				<p:calendar id="startDate"
-					value="#{addProjectBB.newProject.startDate}" />
+				<p:calendar id="startDate" value="#{addProjectBB.newProject.startDate}" >
+					<p:ajax event="dateSelect" update="AddProposalPanel" />
+				</p:calendar>
 
 				<h:outputText value="#{i18n.endDate}:" />
-				<p:calendar id="endDate" value="#{addProjectBB.newProject.endDate}" />
+				<p:calendar id="endDate" mindate="#{addProjectBB.newProject.startDate}" value="#{addProjectBB.newProject.endDate}" />
 
 				<h:outputText value="#{i18n.price}:" />
 				<p:inputText value="#{addProjectBB.newProject.price}" id="price">
